@@ -377,11 +377,12 @@
 
         /* Survive or Perish Wrapper */
         .survive-perish-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: start;
+            gap: 2rem;
             margin-bottom: 3rem;
+            width: 100%;
         }
 
         .survive-perish-wrapper .survive-text,
@@ -393,6 +394,8 @@
             text-transform: uppercase;
             writing-mode: vertical-rl;
             text-orientation: mixed;
+            position: sticky;
+            top: 150px;
         }
 
         .survive-perish-wrapper .survive-text {
