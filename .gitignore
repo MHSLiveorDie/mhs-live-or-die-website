@@ -1,12 +1,11 @@
 # MHS Live or Die - Files to Exclude from Git
 
-# Git LFS now handles all MP4 files
+# Git LFS now handles all MP4 and MOV files
 # All videos will be stored in Git LFS
 
 # Exclude only non-video large files
 Gears*.mp4
 official*.mp4
-*.mov
 *.avi
 *.mkv
 *.webm
