@@ -12,15 +12,15 @@
     <style>
         /* Survive or Perish Wrapper */
         .survive-perish-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
+            position: relative;
             margin-bottom: 3rem;
         }
 
         .survive-perish-wrapper .survive-text,
         .survive-perish-wrapper .perish-text {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
             font-family: var(--font-heading);
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 900;
@@ -28,15 +28,18 @@
             text-transform: uppercase;
             writing-mode: vertical-rl;
             text-orientation: mixed;
+            z-index: 10;
         }
 
         .survive-perish-wrapper .survive-text {
+            left: 10px;
             color: var(--battlefield-primary);
             text-shadow: 0 0 20px var(--battlefield-glow);
             animation: glitchSurvive 3s infinite;
         }
 
         .survive-perish-wrapper .perish-text {
+            right: 10px;
             color: var(--horror-primary);
             text-shadow: 0 0 20px var(--horror-glow);
             animation: glitchPerish 3s infinite;
