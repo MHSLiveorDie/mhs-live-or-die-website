@@ -1,16 +1,9 @@
 # MHS Live or Die - Files to Exclude from Git
 
-# Exclude large video files (over 50MB)
-# Small videos under 50MB can be included for auto-deploy
-# *.mp4
-# *.mov
-# *.avi
-# *.mkv
-# *.webm
+# Git LFS now handles all MP4 files
+# All videos will be stored in Git LFS
 
-# Exclude specific large videos
-74.mp4
-Battlefield*.mp4
+# Exclude only non-video large files
 Gears*.mp4
 official*.mp4
 *.mov
