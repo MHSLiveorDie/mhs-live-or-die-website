@@ -206,6 +206,58 @@
                 padding-top: 80px;
             }
         }
+
+        /* Survive or Perish Wrapper */
+        .survive-perish-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .survive-perish-wrapper .survive-text,
+        .survive-perish-wrapper .perish-text {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .survive-perish-wrapper .survive-text {
+            color: var(--battlefield-primary);
+            text-shadow: 0 0 20px var(--battlefield-glow);
+            animation: glitchSurvive 3s infinite;
+        }
+
+        .survive-perish-wrapper .perish-text {
+            color: var(--horror-primary);
+            text-shadow: 0 0 20px var(--horror-glow);
+            animation: glitchPerish 3s infinite;
+        }
+
+        @keyframes glitchSurvive {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--battlefield-glow);
+            }
+            95% {
+                text-shadow: -2px 0 var(--battlefield-primary);
+                transform: skew(-0.5deg);
+            }
+        }
+
+        @keyframes glitchPerish {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--horror-glow);
+            }
+            95% {
+                text-shadow: 2px 0 var(--horror-primary);
+                transform: skew(0.5deg);
+            }
+        }
     </style>
 </head>
 <body class="live-page">
@@ -241,7 +293,11 @@
         </div>
 
         <!-- REPLACE "VIDEO_ID_HERE" with your actual YouTube live stream video ID -->
-        <div class="stream-chat-container">
+        <!-- Survive or Perish with Stream/Chat Container -->
+        <div class="survive-perish-wrapper">
+            <span class="survive-text">SURVIVE</span>
+
+            <div class="stream-chat-container">
             <!-- Stream Player -->
             <div class="stream-wrapper" id="streamContainer">
                 <div class="stream-inner">
@@ -268,6 +324,9 @@
                     <p>Chat will appear here when stream is live</p>
                 </div>
             </div>
+            </div>
+
+            <span class="perish-text">PERISH</span>
         </div>
 
         <!-- Setup Instructions -->

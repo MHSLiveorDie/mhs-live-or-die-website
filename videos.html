@@ -9,6 +9,59 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Electrolize&display=swap" rel="stylesheet">
+    <style>
+        /* Survive or Perish Wrapper */
+        .survive-perish-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .survive-perish-wrapper .survive-text,
+        .survive-perish-wrapper .perish-text {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .survive-perish-wrapper .survive-text {
+            color: var(--battlefield-primary);
+            text-shadow: 0 0 20px var(--battlefield-glow);
+            animation: glitchSurvive 3s infinite;
+        }
+
+        .survive-perish-wrapper .perish-text {
+            color: var(--horror-primary);
+            text-shadow: 0 0 20px var(--horror-glow);
+            animation: glitchPerish 3s infinite;
+        }
+
+        @keyframes glitchSurvive {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--battlefield-glow);
+            }
+            95% {
+                text-shadow: -2px 0 var(--battlefield-primary);
+                transform: skew(-0.5deg);
+            }
+        }
+
+        @keyframes glitchPerish {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--horror-glow);
+            }
+            95% {
+                text-shadow: 2px 0 var(--horror-primary);
+                transform: skew(0.5deg);
+            }
+        }
+    </style>
 </head>
 <body class="videos-page">
     <!-- Full Page Dispersion Effect Background -->
@@ -70,7 +123,11 @@
     <!-- Videos Grid -->
     <section class="all-videos">
         <div class="container">
-            <div class="video-grid" id="allVideos">
+            <!-- Survive or Perish with Videos Grid -->
+            <div class="survive-perish-wrapper">
+                <span class="survive-text">SURVIVE</span>
+
+                <div class="video-grid" id="allVideos">
                 <!-- Videos will be loaded dynamically via JavaScript -->
                 <!-- You can manually add your videos here or use the YouTube API -->
 
@@ -131,6 +188,9 @@
                 </div>
 
                 <!-- Add more video cards as needed -->
+                </div>
+
+                <span class="perish-text">PERISH</span>
             </div>
 
             <div class="load-more-container">

@@ -374,6 +374,58 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* Survive or Perish Wrapper */
+        .survive-perish-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .survive-perish-wrapper .survive-text,
+        .survive-perish-wrapper .perish-text {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .survive-perish-wrapper .survive-text {
+            color: var(--battlefield-primary);
+            text-shadow: 0 0 20px var(--battlefield-glow);
+            animation: glitchSurvive 3s infinite;
+        }
+
+        .survive-perish-wrapper .perish-text {
+            color: var(--horror-primary);
+            text-shadow: 0 0 20px var(--horror-glow);
+            animation: glitchPerish 3s infinite;
+        }
+
+        @keyframes glitchSurvive {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--battlefield-glow);
+            }
+            95% {
+                text-shadow: -2px 0 var(--battlefield-primary);
+                transform: skew(-0.5deg);
+            }
+        }
+
+        @keyframes glitchPerish {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--horror-glow);
+            }
+            95% {
+                text-shadow: 2px 0 var(--horror-primary);
+                transform: skew(0.5deg);
+            }
+        }
     </style>
 </head>
 <body class="reels-page">
@@ -408,8 +460,12 @@
             <p>Quick clips, epic moments, and gaming highlights</p>
         </div>
 
-        <!-- Reels Grid -->
-        <div class="reels-grid" id="reelsGrid">
+        <!-- Survive or Perish with Reels Grid -->
+        <div class="survive-perish-wrapper">
+            <span class="survive-text">SURVIVE</span>
+
+            <!-- Reels Grid -->
+            <div class="reels-grid" id="reelsGrid">
             <!-- Reel 1 - Battlefield -->
             <div class="reel-card">
                 <button class="close-fullscreen-btn">✕</button>
@@ -452,6 +508,9 @@
                     </div>
                 </div>
             </div>
+            </div>
+
+            <span class="perish-text">PERISH</span>
         </div>
 
         <!-- Pagination -->
