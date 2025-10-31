@@ -1,0 +1,45 @@
+# MHS Live or Die - Files to Exclude from Git
+
+# Exclude ALL video files (too large for GitHub, hosted on Netlify)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+
+# Exclude large audio files
+*.mp3
+*.wav
+*.ogg
+
+# Exclude large bitmap images
+*.bmp
+
+# Exclude extremely large video files (over 100MB)
+# Netlify free tier has 100MB per file limit
+Gears 5 Montage.mp4
+official trailer.mp4
+
+# Backup files
+*.bak
+*-old.*
+*-backup.*
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Node modules (if you add any build tools later)
+node_modules/

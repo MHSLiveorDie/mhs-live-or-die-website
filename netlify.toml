@@ -1,0 +1,50 @@
+# Netlify Configuration for MHS Live or Die
+# Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # No build command needed for static HTML site
+  publish = "."
+
+[[redirects]]
+  # Redirect intro.html to index.html (new landing page)
+  from = "/intro.html"
+  to = "/index.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  # Redirect old index.html to home.html
+  from = "/index-old.html"
+  to = "/home.html"
+  status = 301
+  force = true
+
+[[headers]]
+  # Cache static assets for better performance
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Cache videos for 1 week (shorter than CSS/JS since they might update)
+  for = "/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  # Security headers
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Ignore large video file during build (optional - remove if you want to include it)
+# You may need to exclude Gears 5 Montage.mp4 (2.9GB) - too large for free Netlify
+# Netlify free tier has 100MB per file limit

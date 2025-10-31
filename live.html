@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream - MHS Live or Die</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Electrolize&display=swap" rel="stylesheet">
+    <style>
+        .live-page {
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .live-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .live-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .live-header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .live-status {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--horror-primary);
+            color: white;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .stream-chat-container {
+            display: flex;
+            gap: 2rem;
+            max-width: 98%;
+            margin: 0 auto 2rem;
+            align-items: stretch;
+        }
+
+        .stream-wrapper {
+            position: relative;
+            flex: 1;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            min-height: 900px;
+            border-radius: 12px;
+            border: 4px solid transparent;
+            background:
+                linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+                linear-gradient(135deg, var(--horror-primary), var(--battlefield-primary), var(--horror-primary)) border-box;
+            box-shadow:
+                0 10px 50px rgba(255, 0, 0, 0.3),
+                0 0 100px rgba(0, 255, 65, 0.2),
+                0 0 30px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-wrapper {
+            position: relative;
+            width: 550px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            border: 4px solid transparent;
+            background:
+                linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+                linear-gradient(135deg, var(--battlefield-primary), var(--horror-primary), var(--battlefield-primary)) border-box;
+            box-shadow:
+                0 10px 50px rgba(0, 255, 65, 0.3),
+                0 0 100px rgba(255, 0, 0, 0.2),
+                0 0 30px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .stream-chat-container {
+                flex-direction: column;
+            }
+
+            .stream-wrapper {
+                height: 500px;
+            }
+
+            .chat-wrapper {
+                width: 100%;
+                height: 500px;
+            }
+        }
+
+        .stream-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stream-inner iframe,
+        .stream-inner .offline-message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stream-info {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .stream-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--battlefield-primary);
+        }
+
+        .stream-info p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .offline-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(26, 26, 26, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .offline-message h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .offline-message p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+        }
+
+        .setup-instructions {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 12px;
+            border-left: 4px solid var(--battlefield-primary);
+        }
+
+        .setup-instructions h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--battlefield-primary);
+        }
+
+        .setup-instructions ol {
+            margin-left: 1.5rem;
+            line-height: 2;
+        }
+
+        .setup-instructions li {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .setup-instructions code {
+            background: var(--bg-darker);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--horror-primary);
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .live-page {
+                padding-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body class="live-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="intro.html" style="text-decoration: none; color: inherit;">
+                    <h1>MHS <span class="live">LIVE</span> OR <span class="die">DIE</span></h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="reels.html">Reels</a></li>
+                <li><a href="clips.html">Clips</a></li>
+                <li><a href="live.html" class="active">Live Stream</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="https://www.youtube.com/@mhsliveordie6255" target="_blank" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="live-container">
+        <div class="live-header">
+            <h1>🔴 LIVE STREAM</h1>
+            <span class="live-status">● TESTING MODE</span>
+        </div>
+
+        <!-- REPLACE "VIDEO_ID_HERE" with your actual YouTube live stream video ID -->
+        <div class="stream-chat-container">
+            <!-- Stream Player -->
+            <div class="stream-wrapper" id="streamContainer">
+                <div class="stream-inner">
+                    <!-- When you go live, replace VIDEO_ID_HERE with your actual live stream ID -->
+                    <!-- Example: https://www.youtube.com/watch?v=YOUR_VIDEO_ID -->
+                    <!-- Use: https://www.youtube.com/embed/YOUR_VIDEO_ID -->
+
+                    <!-- TEMPORARY PLACEHOLDER - Replace with your live stream -->
+                    <div class="offline-message">
+                        <h2>Stream Currently Offline</h2>
+                        <p>Follow the instructions below to set up your live stream</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Chat -->
+            <div class="chat-wrapper" id="chatContainer">
+                <!-- When you go live, this will show YouTube live chat -->
+                <!-- Replace VIDEO_ID_HERE with your actual live stream video ID -->
+                <!-- Use: https://www.youtube.com/live_chat?v=YOUR_VIDEO_ID&embed_domain=YOUR_DOMAIN -->
+
+                <div class="offline-message">
+                    <h2>💬 Live Chat</h2>
+                    <p>Chat will appear here when stream is live</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="setup-instructions">
+            <h3>📡 How to Set Up Your Live Stream:</h3>
+            <ol>
+                <li><strong>Go to YouTube Studio</strong> → Click "Create" → "Go Live"</li>
+                <li><strong>Set up your stream</strong> with title, description, and settings</li>
+                <li><strong>Open OBS Studio</strong> and configure your scenes</li>
+                <li><strong>In YouTube Studio</strong>, copy your <code>Stream key</code></li>
+                <li><strong>In OBS</strong>:
+                    <ul>
+                        <li>Settings → Stream</li>
+                        <li>Service: YouTube</li>
+                        <li>Paste your stream key</li>
+                    </ul>
+                </li>
+                <li><strong>Click "Start Streaming"</strong> in OBS</li>
+                <li><strong>Once live</strong>, copy your YouTube video URL</li>
+                <li><strong>Get the video ID</strong> from the URL:
+                    <br><code>https://www.youtube.com/watch?v=<span style="color: #00ff41;">YOUR_VIDEO_ID</span></code>
+                </li>
+                <li><strong>Update this page</strong>: Replace the stream offline message with:
+                    <br><code>&lt;iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</code>
+                </li>
+                <li><strong>Add live chat</strong>: Replace the chat offline message with:
+                    <br><code>&lt;iframe src="https://www.youtube.com/live_chat?v=YOUR_VIDEO_ID&embed_domain=localhost" frameborder="0"&gt;&lt;/iframe&gt;</code>
+                </li>
+            </ol>
+            <p style="margin-top: 2rem; padding: 1rem; background: rgba(255, 0, 0, 0.1); border-radius: 8px;">
+                💡 <strong>Tip:</strong> I can help you update the embed code once you have your live stream video ID!
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>MHS <span class="live">LIVE</span> OR <span class="die">DIE</span></h3>
+                    <p>Survival gaming at its finest</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="live.html">Live Stream</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://www.youtube.com/@mhsliveordie6255" target="_blank" title="YouTube">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MHS Live or Die. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

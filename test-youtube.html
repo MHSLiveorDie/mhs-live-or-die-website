@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Embed Test</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ff0000;
+        }
+        .video-test {
+            margin: 20px 0;
+            border: 2px solid #00ff41;
+            padding: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 450px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>YouTube Embed Test Page</h1>
+        <p>If you can see the videos below, YouTube embeds are working on your computer.</p>
+
+        <div class="video-test">
+            <h2>Test 1: Basic Embed (Gears 4 #1)</h2>
+            <iframe
+                src="https://www.youtube.com/embed/nq6L7QDOsTs"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-test">
+            <h2>Test 2: With Parameters (Intro Video)</h2>
+            <iframe
+                src="https://www.youtube.com/embed/-ZY5sDcE9uA?autoplay=0&mute=0"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-test">
+            <h2>Test 3: Public YouTube Video (Popular)</h2>
+            <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <h2>What to Check:</h2>
+        <ul>
+            <li>Can you see ALL 3 videos above?</li>
+            <li>Do they play when you click them?</li>
+            <li>Any error messages?</li>
+        </ul>
+
+        <h2>Troubleshooting:</h2>
+        <ul>
+            <li>Disable browser extensions (especially ad blockers)</li>
+            <li>Clear browser cache (Ctrl + Shift + Delete)</li>
+            <li>Try incognito/private mode</li>
+            <li>Try a different browser</li>
+            <li>Check your internet connection</li>
+        </ul>
+    </div>
+</body>
+</html>

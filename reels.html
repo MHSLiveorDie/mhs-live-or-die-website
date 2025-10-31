@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch MHS Live or Die Reels & Shorts - Quick gaming highlights, epic moments, and funny clips.">
+    <title>Reels & Shorts - MHS Live or Die</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Electrolize&display=swap" rel="stylesheet">
+    <style>
+        .reels-page {
+            min-height: 100vh;
+            padding-top: 100px;
+            background:
+                linear-gradient(135deg, rgba(10, 10, 10, 0.7) 0%, rgba(5, 26, 26, 0.7) 50%, rgba(5, 10, 15, 0.7) 100%),
+                url('images/Metal-Gear-Solid-4.jpg') 50% 50%/cover no-repeat fixed;
+        }
+
+        .reels-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .reels-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .reels-header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .reels-header h1 span {
+            background: linear-gradient(135deg, var(--horror-primary), var(--battlefield-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reels-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .reel-card {
+            position: relative;
+            aspect-ratio: 9 / 16;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: var(--bg-card);
+            border: 2px solid transparent;
+        }
+
+        .reel-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--horror-primary);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Maximized popup effect for desktop */
+        .reel-card.maximized {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 30vw;
+            max-width: 600px;
+            min-width: 400px;
+            z-index: 1000;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+            animation: popToCenter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popToCenter {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .reel-card.minimized {
+            opacity: 0.3;
+        }
+
+        /* Overlay background when reel is maximized */
+        .reels-grid.has-maximized::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999;
+        }
+
+        /* Fullscreen styles for mobile */
+        .reel-card.fullscreen-mobile {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            max-height: 100vh;
+            border-radius: 0;
+            z-index: 9999;
+            aspect-ratio: auto;
+        }
+
+        .reel-card.fullscreen-mobile .reel-thumbnail {
+            height: 100%;
+        }
+
+        /* Close button for fullscreen/maximized */
+        .close-fullscreen-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 0, 0, 0.8);
+            border: 2px solid white;
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-fullscreen-btn:hover {
+            background: rgba(255, 0, 0, 1);
+            transform: scale(1.1);
+        }
+
+        .reel-card.fullscreen-mobile .close-fullscreen-btn,
+        .reel-card.maximized .close-fullscreen-btn {
+            display: flex;
+        }
+
+        .reel-thumbnail {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: var(--bg-darker);
+        }
+
+        .iframe-click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            cursor: pointer;
+            display: none;
+        }
+
+        .reel-card.has-iframe .iframe-click-overlay {
+            display: block;
+        }
+
+        .reel-thumbnail img,
+        .reel-thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reel-video {
+            cursor: pointer;
+        }
+
+        .reel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+        }
+
+        .reel-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .reel-info {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .reel-views {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Video progress bar */
+        .video-progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 3;
+            cursor: pointer;
+        }
+
+        .video-progress-container:hover {
+            height: 8px;
+        }
+
+        .video-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--horror-primary), var(--battlefield-primary));
+            transition: width 0.1s linear;
+            pointer-events: none;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .reel-card:hover .play-icon {
+            background: var(--horror-primary);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .game-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .horror-badge {
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+        }
+
+        .battlefield-badge {
+            background: rgba(0, 255, 65, 0.9);
+            color: black;
+        }
+
+        /* Placeholder for when no reels yet */
+        .no-reels {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 12px;
+            border: 2px solid var(--horror-primary);
+        }
+
+        .no-reels h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .no-reels p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .pagination button {
+            padding: 0.75rem 1.25rem;
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background: rgba(0, 255, 65, 0.2);
+            border-color: var(--battlefield-primary);
+            transform: translateY(-2px);
+        }
+
+        .pagination button.active {
+            background: var(--battlefield-primary);
+            border-color: var(--battlefield-primary);
+            color: black;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination button:disabled:hover {
+            transform: none;
+            background: rgba(26, 26, 26, 0.9);
+            border-color: rgba(0, 255, 65, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .reels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .reels-page {
+                padding-top: 80px;
+            }
+
+            .pagination button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="reels-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="intro.html" style="text-decoration: none; color: inherit;">
+                    <h1>MHS <span class="live">LIVE</span> OR <span class="die">DIE</span></h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="reels.html" class="active">Reels</a></li>
+                <li><a href="clips.html">Clips</a></li>
+                <li><a href="live.html">Live Stream</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="https://www.youtube.com/@mhsliveordie6255" target="_blank" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="reels-container">
+        <div class="reels-header">
+            <h1>🎬 <span>Reels & Shorts</span></h1>
+            <p>Quick clips, epic moments, and gaming highlights</p>
+        </div>
+
+        <!-- Reels Grid -->
+        <div class="reels-grid" id="reelsGrid">
+            <!-- Reel 1 - Battlefield -->
+            <div class="reel-card">
+                <button class="close-fullscreen-btn">✕</button>
+                <span class="game-badge battlefield-badge">Battlefield</span>
+                <div class="reel-thumbnail">
+                    <video class="reel-video" muted loop playsinline preload="auto">
+                        <source src="videos/battlefield-6.mp4" type="video/mp4">
+                        <source src="Battlefield 6.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                    </div>
+                    <div class="reel-overlay">
+                        <div class="reel-title">Battlefield Highlight</div>
+                        <div class="reel-info">
+                            <span class="reel-views">🎮 Epic Moment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reel 2 - COD Zombies -->
+            <div class="reel-card">
+                <button class="close-fullscreen-btn">✕</button>
+                <span class="game-badge horror-badge">COD Zombies</span>
+                <div class="reel-thumbnail">
+                    <video class="reel-video" muted loop playsinline preload="auto">
+                        <source src="COD Zombies.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                    </div>
+                    <div class="reel-overlay">
+                        <div class="reel-title">COD Zombies Highlight</div>
+                        <div class="reel-info">
+                            <span class="reel-views">🧟 Epic Moment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <button id="prevBtn" onclick="changePage(-1)">← Previous</button>
+            <div id="pageNumbers"></div>
+            <button id="nextBtn" onclick="changePage(1)">Next →</button>
+        </div>
+
+        <!-- Example Reel Card Structure (currently hidden) -->
+        <!-- Uncomment and duplicate when you have YouTube Shorts to add -->
+        <!--
+        <div class="reels-grid">
+            <a href="YOUR_SHORT_URL" class="reel-card" target="_blank">
+                <span class="game-badge horror-badge">Resident Evil</span>
+                <div class="reel-thumbnail">
+                    <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg" alt="Reel Title">
+                    <div class="play-icon">▶</div>
+                    <div class="reel-overlay">
+                        <div class="reel-title">Epic Boss Fight!</div>
+                        <div class="reel-info">
+                            <span class="reel-views">👁️ 1.2K</span>
+                            <span>30s</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>MHS <span class="live">LIVE</span> OR <span class="die">DIE</span></h3>
+                    <p>Survival gaming at its finest</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="reels.html">Reels</a></li>
+                        <li><a href="live.html">Live Stream</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://www.youtube.com/@mhsliveordie6255" target="_blank" title="YouTube">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MHS Live or Die. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Pagination variables
+        const REELS_PER_PAGE = 15;
+        let currentPage = 1;
+        let allReels = [];
+
+        // Get all reel cards
+        function initializePagination() {
+            const reelsGrid = document.getElementById('reelsGrid');
+            allReels = Array.from(reelsGrid.querySelectorAll('.reel-card'));
+
+            if (allReels.length > REELS_PER_PAGE) {
+                showPage(1);
+                createPageNumbers();
+            } else {
+                // Hide pagination if 15 or fewer reels
+                document.getElementById('pagination').style.display = 'none';
+            }
+        }
+
+        function showPage(page) {
+            currentPage = page;
+            const startIndex = (page - 1) * REELS_PER_PAGE;
+            const endIndex = startIndex + REELS_PER_PAGE;
+
+            // Hide all reels
+            allReels.forEach((reel, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    reel.style.display = 'block';
+                } else {
+                    reel.style.display = 'none';
+                }
+            });
+
+            // Update button states
+            document.getElementById('prevBtn').disabled = (page === 1);
+            document.getElementById('nextBtn').disabled = (page === Math.ceil(allReels.length / REELS_PER_PAGE));
+
+            // Update active page number
+            updateActivePageNumber();
+
+            // Scroll to top of reels section
+            document.getElementById('reelsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function createPageNumbers() {
+            const totalPages = Math.ceil(allReels.length / REELS_PER_PAGE);
+            const pageNumbersDiv = document.getElementById('pageNumbers');
+            pageNumbersDiv.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.onclick = () => showPage(i);
+                pageBtn.classList.add('page-number');
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageNumbersDiv.appendChild(pageBtn);
+            }
+        }
+
+        function updateActivePageNumber() {
+            const pageButtons = document.querySelectorAll('.page-number');
+            pageButtons.forEach((btn, index) => {
+                if (index + 1 === currentPage) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(allReels.length / REELS_PER_PAGE);
+            const newPage = currentPage + direction;
+
+            if (newPage >= 1 && newPage <= totalPages) {
+                showPage(newPage);
+            }
+        }
+
+        // Initialize pagination on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePagination();
+        });
+
+        // Autoplay videos when scrolled into view (muted), click to unmute - only one video has audio at a time
+        const reelVideos = document.querySelectorAll('.reel-video');
+        const reelCards = document.querySelectorAll('.reel-card');
+        let currentAudioVideo = null;
+        let currentIframe = null;
+
+        const reelObserverOptions = {
+            threshold: 0.5 // 50% of video must be visible
+        };
+
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+
+                if (entry.isIntersecting) {
+                    // Play video muted when in view
+                    video.muted = true;
+                    video.play().catch(err => console.log('Autoplay prevented:', err));
+                } else {
+                    // Pause video when out of view
+                    video.pause();
+                    video.currentTime = 0; // Reset to start
+
+                    // If this was the audio video, clear it
+                    if (currentAudioVideo === video) {
+                        currentAudioVideo = null;
+                    }
+                }
+            });
+        }, reelObserverOptions);
+
+        // Observe all reel videos
+        reelVideos.forEach(video => {
+            videoObserver.observe(video);
+
+            // Update progress bar as video plays
+            video.addEventListener('timeupdate', () => {
+                const card = video.closest('.reel-card');
+                const progressBar = card.querySelector('.video-progress-bar');
+                if (progressBar && video.duration) {
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = percentage + '%';
+                }
+            });
+
+            // Click on progress bar to seek
+            const card = video.closest('.reel-card');
+            const progressContainer = card.querySelector('.video-progress-container');
+            if (progressContainer) {
+                progressContainer.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent triggering maximize
+                    const rect = progressContainer.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    const percentage = clickX / rect.width;
+                    video.currentTime = percentage * video.duration;
+                });
+            }
+
+            // Click to unmute - only one video has audio at a time
+            video.addEventListener('click', () => {
+                // Mute any previous HTML5 video
+                if (currentAudioVideo && currentAudioVideo !== video) {
+                    currentAudioVideo.muted = true;
+                }
+
+                // Just mute the YouTube iframe, don't stop it
+                if (currentIframe) {
+                    const iframeCard = currentIframe.closest('.reel-card');
+                    const baseSrc = currentIframe.src.split('?')[0];
+
+                    // Change to muted but keep playing
+                    currentIframe.src = baseSrc + '?autoplay=1&mute=1';
+
+                    // Show the overlay back
+                    const overlay = iframeCard.querySelector('.iframe-click-overlay');
+                    if (overlay) {
+                        overlay.style.display = 'block';
+                    }
+
+                    currentIframe = null;
+                }
+
+                // Unmute this video
+                video.muted = false;
+                video.volume = 0.7;
+                currentAudioVideo = video;
+
+                // Make sure video is playing
+                if (video.paused) {
+                    video.play().catch(err => console.log('Play prevented:', err));
+                }
+            });
+        });
+
+        // Maximize/Fullscreen functionality
+        const isMobile = window.innerWidth <= 768;
+        const reelsGrid = document.getElementById('reelsGrid');
+        let currentMaximizedCard = null;
+
+        reelCards.forEach(card => {
+            const closeBtn = card.querySelector('.close-fullscreen-btn');
+
+            if (isMobile) {
+                // Mobile: Double-tap for fullscreen
+                let lastTap = 0;
+                card.addEventListener('click', (e) => {
+                    // Don't trigger if clicking overlay, close button, or iframe
+                    if (e.target.classList.contains('iframe-click-overlay') ||
+                        e.target.classList.contains('close-fullscreen-btn') ||
+                        e.target.tagName === 'IFRAME') {
+                        return;
+                    }
+
+                    const currentTime = new Date().getTime();
+                    const tapGap = currentTime - lastTap;
+
+                    // Double tap detection (within 300ms)
+                    if (tapGap < 300 && tapGap > 0) {
+                        card.classList.add('fullscreen-mobile');
+                        document.body.style.overflow = 'hidden';
+                    }
+
+                    lastTap = currentTime;
+                });
+            } else {
+                // Desktop: Single click to maximize with popup effect
+                card.addEventListener('click', (e) => {
+                    // Don't trigger if clicking overlay, close button, or iframe
+                    if (e.target.classList.contains('iframe-click-overlay') ||
+                        e.target.classList.contains('close-fullscreen-btn') ||
+                        e.target.tagName === 'IFRAME') {
+                        return;
+                    }
+
+                    // If already maximized, DON'T close it on click (only X button closes)
+                    if (card.classList.contains('maximized')) {
+                        return;
+                    } else {
+                        // Close any previously maximized card
+                        if (currentMaximizedCard) {
+                            currentMaximizedCard.classList.remove('maximized');
+                            // Mute previously maximized video
+                            const prevVideo = currentMaximizedCard.querySelector('.reel-video');
+                            if (prevVideo) {
+                                prevVideo.muted = true;
+                            }
+                        }
+
+                        // Maximize this card and minimize others
+                        card.classList.add('maximized');
+                        reelCards.forEach(c => {
+                            if (c !== card) {
+                                c.classList.add('minimized');
+                            }
+                        });
+                        reelsGrid.classList.add('has-maximized');
+                        currentMaximizedCard = card;
+
+                        // Unmute this video
+                        const video = card.querySelector('.reel-video');
+                        if (video) {
+                            video.muted = false;
+                            video.volume = 0.7;
+                            currentAudioVideo = video;
+                        }
+
+                        // Mute all HTML5 videos except this one
+                        reelVideos.forEach(v => {
+                            if (v !== video) {
+                                v.muted = true;
+                            }
+                        });
+
+                        // If there's a current iframe playing, mute it
+                        if (currentIframe) {
+                            const baseSrc = currentIframe.src.split('?')[0];
+                            currentIframe.src = baseSrc + '?autoplay=1&mute=1';
+                            const iframeCard = currentIframe.closest('.reel-card');
+                            const overlay = iframeCard.querySelector('.iframe-click-overlay');
+                            if (overlay) overlay.style.display = 'block';
+                            currentIframe = null;
+                        }
+                    }
+                });
+            }
+
+            // Close button works for both mobile and desktop
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+
+                    if (isMobile) {
+                        card.classList.remove('fullscreen-mobile');
+                        document.body.style.overflow = '';
+                    } else {
+                        card.classList.remove('maximized');
+                        reelCards.forEach(c => c.classList.remove('minimized'));
+                        reelsGrid.classList.remove('has-maximized');
+                        currentMaximizedCard = null;
+
+                        // Mute the video when closing (but keep it playing)
+                        const video = card.querySelector('.reel-video');
+                        if (video) {
+                            video.muted = true;
+                            currentAudioVideo = null;
+                            // Make sure it continues playing if it was visible
+                            if (video.paused) {
+                                video.play().catch(err => console.log('Play prevented:', err));
+                            }
+                        }
+
+                        // Mute the iframe when closing (but keep it playing)
+                        const iframe = card.querySelector('iframe');
+                        if (iframe) {
+                            const baseSrc = iframe.src.split('?')[0];
+                            iframe.src = baseSrc + '?autoplay=1&mute=1';
+                            const overlay = card.querySelector('.iframe-click-overlay');
+                            if (overlay) {
+                                overlay.style.display = 'block';
+                            }
+                            currentIframe = null;
+                        }
+
+                        // Re-trigger autoplay for all visible videos
+                        reelVideos.forEach(v => {
+                            const cardEl = v.closest('.reel-card');
+                            const rect = cardEl.getBoundingClientRect();
+                            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+                            if (isVisible && v.paused) {
+                                v.muted = true;
+                                v.play().catch(err => console.log('Autoplay prevented:', err));
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        // Handle YouTube iframe clicks using overlay
+        const iframeOverlays = document.querySelectorAll('.iframe-click-overlay');
+        iframeOverlays.forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const card = overlay.closest('.reel-card');
+                const iframe = card.querySelector('iframe');
+
+                console.log('YouTube overlay clicked');
+
+                if (!isMobile) {
+                    // Desktop: Maximize the card with popup effect
+                    if (card.classList.contains('maximized')) {
+                        // If already maximized, DON'T close it on click (only X button closes)
+                        return;
+                    } else {
+                        // Close any previously maximized card
+                        if (currentMaximizedCard) {
+                            currentMaximizedCard.classList.remove('maximized');
+                            // Mute previously maximized video/iframe
+                            const prevVideo = currentMaximizedCard.querySelector('.reel-video');
+                            if (prevVideo) {
+                                prevVideo.muted = true;
+                            }
+                            const prevIframe = currentMaximizedCard.querySelector('iframe');
+                            if (prevIframe) {
+                                const prevBaseSrc = prevIframe.src.split('?')[0];
+                                prevIframe.src = prevBaseSrc + '?autoplay=1&mute=1';
+                                const prevOverlay = currentMaximizedCard.querySelector('.iframe-click-overlay');
+                                if (prevOverlay) prevOverlay.style.display = 'block';
+                            }
+                        }
+
+                        // Maximize this card
+                        card.classList.add('maximized');
+                        reelCards.forEach(c => {
+                            if (c !== card) {
+                                c.classList.add('minimized');
+                            }
+                        });
+                        reelsGrid.classList.add('has-maximized');
+                        currentMaximizedCard = card;
+
+                        // Mute all HTML5 videos
+                        reelVideos.forEach(video => {
+                            video.muted = true;
+                        });
+                        currentAudioVideo = null;
+
+                        // Mute previous iframe if different
+                        if (currentIframe && currentIframe !== iframe) {
+                            const oldCard = currentIframe.closest('.reel-card');
+                            const oldSrc = currentIframe.src.split('?')[0];
+                            currentIframe.src = oldSrc + '?autoplay=1&mute=1';
+                            const oldOverlay = oldCard.querySelector('.iframe-click-overlay');
+                            if (oldOverlay) oldOverlay.style.display = 'block';
+                        }
+
+                        // Unmute this iframe and hide overlay
+                        const baseSrc = iframe.src.split('?')[0];
+                        iframe.src = baseSrc + '?autoplay=1&mute=0';
+                        currentIframe = iframe;
+                        overlay.style.display = 'none';
+                    }
+                } else {
+                    // Mobile: Just unmute audio
+                    // Mute all HTML5 videos
+                    reelVideos.forEach(video => {
+                        video.muted = true;
+                    });
+                    currentAudioVideo = null;
+
+                    // Just mute previous iframe, don't stop it
+                    if (currentIframe && currentIframe !== iframe) {
+                        const oldCard = currentIframe.closest('.reel-card');
+                        const oldSrc = currentIframe.src.split('?')[0];
+                        currentIframe.src = oldSrc + '?autoplay=1&mute=1';
+                        const oldOverlay = oldCard.querySelector('.iframe-click-overlay');
+                        if (oldOverlay) oldOverlay.style.display = 'block';
+                    }
+
+                    // Change this iframe to unmuted version and hide overlay
+                    const baseSrc = iframe.src.split('?')[0];
+                    iframe.src = baseSrc + '?autoplay=1&mute=0';
+                    currentIframe = iframe;
+                    overlay.style.display = 'none';
+                }
+            });
+        });
+
+        // Prevent progress bar clicks from minimizing iframe cards
+        const allProgressContainers = document.querySelectorAll('.video-progress-container');
+        allProgressContainers.forEach(container => {
+            container.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click/minimize
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch MHS Live or Die Clips - Funny moments, epic fails, and gaming highlights.">
+    <title>Clips & Funny Moments - MHS Live or Die</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Electrolize&display=swap" rel="stylesheet">
+    <style>
+        .clips-page {
+            min-height: 100vh;
+            padding-top: 100px;
+            background:
+                linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(26, 5, 5, 0.75) 50%, rgba(5, 10, 15, 0.8) 100%),
+                url('silent hill 3 wallpaper.jpg') 50% 20%/cover no-repeat fixed;
+        }
+
+        .clips-container {
+            max-width: 2200px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+        }
+
+        .clips-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .clips-header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .clips-header h1 span {
+            background: linear-gradient(135deg, var(--horror-primary), var(--battlefield-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .clips-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .clips-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .clip-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .clip-wrapper.maximized {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 45vw;
+            max-width: 900px;
+            z-index: 1000;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+            animation: popToCenter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popToCenter {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .clip-wrapper.minimized {
+            opacity: 0.3;
+        }
+
+        /* Overlay background when video is maximized */
+        .clips-grid.has-maximized::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999;
+        }
+
+        .clip-card {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-card);
+            border: 2px solid transparent;
+        }
+
+        .clip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .horror-video .clip-card:hover {
+            border-color: var(--horror-primary);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .action-video .clip-card:hover {
+            border-color: var(--battlefield-primary);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .clip-info-box {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .clip-info-box h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .clip-category {
+            font-size: 0.85rem;
+            color: var(--horror-primary);
+            font-weight: 600;
+        }
+
+        .video-controls-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .video-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            min-width: 80px;
+            order: 2;
+        }
+
+        .video-progress {
+            flex: 1;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            position: relative;
+            border-radius: 3px;
+            overflow: hidden;
+            order: 1;
+        }
+
+        .video-progress-bar {
+            height: 100%;
+            background: var(--horror-primary);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .video-progress:hover {
+            height: 8px;
+        }
+
+        .clip-thumbnail {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: var(--bg-darker);
+        }
+
+        .clip-thumbnail img,
+        .clip-thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .clip-video {
+            cursor: pointer;
+        }
+
+        .clip-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+            color: white;
+        }
+
+        .clip-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .clip-info {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .clip-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 0, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .clip-card:hover .play-icon {
+            background: var(--horror-primary);
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .funny-badge {
+            background: rgba(255, 193, 7, 0.9);
+            color: black;
+        }
+
+        .fail-badge {
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+        }
+
+        .epic-badge {
+            background: rgba(0, 255, 65, 0.9);
+            color: black;
+        }
+
+        .horror-badge {
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+        }
+
+        .action-badge {
+            background: rgba(0, 255, 65, 0.9);
+            color: black;
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(0, 255, 65, 0.8);
+            border-color: var(--battlefield-primary);
+            transform: scale(1.1);
+        }
+
+        .close-maximize-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .clip-wrapper.maximized .close-maximize-btn {
+            display: flex;
+        }
+
+        .close-maximize-btn:hover {
+            background: rgba(255, 0, 0, 1);
+            border-color: var(--horror-primary);
+            transform: scale(1.1);
+        }
+
+        /* Placeholder */
+        .no-clips {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 12px;
+            border: 2px solid var(--battlefield-primary);
+        }
+
+        .no-clips h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .no-clips p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .pagination button {
+            padding: 0.75rem 1.25rem;
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: var(--horror-primary);
+            transform: translateY(-2px);
+        }
+
+        .pagination button.active {
+            background: var(--horror-primary);
+            border-color: var(--horror-primary);
+            color: white;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination button:disabled:hover {
+            transform: none;
+            background: rgba(26, 26, 26, 0.9);
+            border-color: rgba(255, 0, 0, 0.3);
+        }
+
+        /* Survive or Perish Wrapper */
+        .survive-perish-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .survive-perish-wrapper .survive-text,
+        .survive-perish-wrapper .perish-text {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .survive-perish-wrapper .survive-text {
+            color: var(--battlefield-primary);
+            text-shadow: 0 0 20px var(--battlefield-glow);
+            animation: glitchSurvive 3s infinite;
+        }
+
+        .survive-perish-wrapper .perish-text {
+            color: var(--horror-primary);
+            text-shadow: 0 0 20px var(--horror-glow);
+            animation: glitchPerish 3s infinite;
+        }
+
+        @keyframes glitchSurvive {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--battlefield-glow);
+            }
+            95% {
+                text-shadow: -2px 0 var(--battlefield-primary);
+                transform: skew(-0.5deg);
+            }
+        }
+
+        @keyframes glitchPerish {
+            0%, 90%, 100% {
+                text-shadow: 0 0 20px var(--horror-glow);
+            }
+            95% {
+                text-shadow: 2px 0 var(--horror-primary);
+                transform: skew(0.5deg);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .clips-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .clips-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .clips-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .clips-page {
+                padding-top: 80px;
+            }
+
+            .pagination button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .survive-perish-wrapper {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .survive-perish-wrapper .survive-text,
+            .survive-perish-wrapper .perish-text {
+                writing-mode: horizontal-tb;
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body class="clips-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="intro.html" style="text-decoration: none; color: inherit;">
+                    <h1>MHS <span class="live">LIVE</span> OR <span class="die">DIE</span></h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="reels.html">Reels</a></li>
+                <li><a href="clips.html" class="active">Clips</a></li>
+                <li><a href="live.html">Live Stream</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="https://www.youtube.com/@mhsliveordie6255" target="_blank" class="subscribe-btn">Subscribe</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="clips-container">
+        <div class="clips-header">
+            <h1>😂 <span>Clips & Funny Moments</span></h1>
+            <p>Epic fails, hilarious moments, and unforgettable gameplay</p>
+        </div>
+
+        <!-- Survive or Perish with Clips Grid -->
+        <div class="survive-perish-wrapper">
+            <span class="survive-text">SURVIVE</span>
+
+            <!-- Clips Grid -->
+            <div class="clips-grid" id="clipsGrid">
+            <!-- Clip 1: Silent Hill 2 Remake Part 1 -->
+            <div class="clip-wrapper horror-video">
+                <div class="clip-card">
+                    <span class="category-badge horror-badge">Horror</span>
+                    <div class="clip-thumbnail">
+                        <video class="clip-video" loop playsinline preload="auto" style="object-fit: cover;">
+                            <source src="videos/silent-hill-2-part1.mov" type="video/mp4">
+                            <source src="Silent Hill 2 remake.mov" type="video/quicktime">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button class="close-maximize-btn" title="Close">✕</button>
+                        <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+                    </div>
+                </div>
+                <div class="clip-info-box">
+                    <div class="video-controls-row">
+                        <div class="video-progress">
+                            <div class="video-progress-bar"></div>
+                        </div>
+                        <span class="video-time">0:00 / 0:00</span>
+                    </div>
+                    <h3>Silent Hill 2 Remake Part 1</h3>
+                </div>
+            </div>
+
+            <!-- Clip 2: Metal Gear Solid Part 1 -->
+            <div class="clip-wrapper action-video">
+                <div class="clip-card">
+                    <span class="category-badge action-badge">Action</span>
+                    <div class="clip-thumbnail">
+                        <video class="clip-video" loop playsinline preload="auto">
+                            <source src="Metal Gear Solid Part 1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button class="close-maximize-btn" title="Close">✕</button>
+                        <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+                    </div>
+                </div>
+                <div class="clip-info-box">
+                    <div class="video-controls-row">
+                        <div class="video-progress">
+                            <div class="video-progress-bar"></div>
+                        </div>
+                        <span class="video-time">0:00 / 0:00</span>
+                    </div>
+                    <h3>Metal Gear Solid Part 1</h3>
+                </div>
+            </div>
+            </div>
+
+            <span class="perish-text">PERISH</span>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <button id="prevBtn" onclick="changePage(-1)">← Previous</button>
+            <div id="pageNumbers"></div>
+            <button id="nextBtn" onclick="changePage(1)">Next →</button>
+        </div>
+
+        <!-- Example Clip Card Structure (currently hidden) -->
+        <!-- Uncomment and duplicate when you have clips to add -->
+        <!--
+        <div class="clips-grid">
+            <div class="clip-card">
+                <span class="category-badge funny-badge">Funny</span>
+                <div class="clip-thumbnail">
+                    <video class="clip-video" muted loop playsinline preload="auto">
+                        <source src="videos/funny-clip-1.mp4" type="video/mp4">
+                    </video>
+                    <div class="clip-overlay">
+                        <div class="clip-title">Hilarious Fail!</div>
+                        <div class="clip-info">
+                            <span class="clip-duration">⏱️ 0:45</span>
+                            <span>😂 Funny</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>MHS <span class="live">LIVE</span> OR <span class="die">DIE</span></h3>
+                    <p>Survival gaming at its finest</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="reels.html">Reels</a></li>
+                        <li><a href="clips.html">Clips</a></li>
+                        <li><a href="live.html">Live Stream</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://www.youtube.com/@mhsliveordie6255" target="_blank" title="YouTube">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MHS Live or Die. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Pagination variables
+        const CLIPS_PER_PAGE = 12;
+        let currentPage = 1;
+        let allClips = [];
+
+        // Get all clip wrappers
+        function initializePagination() {
+            const clipsGrid = document.getElementById('clipsGrid');
+            allClips = Array.from(clipsGrid.querySelectorAll('.clip-wrapper'));
+
+            if (allClips.length > CLIPS_PER_PAGE) {
+                showPage(1);
+                createPageNumbers();
+            } else {
+                // Hide pagination if 10 or fewer clips
+                document.getElementById('pagination').style.display = 'none';
+            }
+        }
+
+        function showPage(page) {
+            currentPage = page;
+            const startIndex = (page - 1) * CLIPS_PER_PAGE;
+            const endIndex = startIndex + CLIPS_PER_PAGE;
+
+            // Hide all clips
+            allClips.forEach((clip, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    clip.style.display = 'flex';
+                } else {
+                    clip.style.display = 'none';
+                }
+            });
+
+            // Update button states
+            document.getElementById('prevBtn').disabled = (page === 1);
+            document.getElementById('nextBtn').disabled = (page === Math.ceil(allClips.length / CLIPS_PER_PAGE));
+
+            // Update active page number
+            updateActivePageNumber();
+
+            // Scroll to top of clips section
+            document.getElementById('clipsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function createPageNumbers() {
+            const totalPages = Math.ceil(allClips.length / CLIPS_PER_PAGE);
+            const pageNumbersDiv = document.getElementById('pageNumbers');
+            pageNumbersDiv.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.onclick = () => showPage(i);
+                pageBtn.classList.add('page-number');
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageNumbersDiv.appendChild(pageBtn);
+            }
+        }
+
+        function updateActivePageNumber() {
+            const pageButtons = document.querySelectorAll('.page-number');
+            pageButtons.forEach((btn, index) => {
+                if (index + 1 === currentPage) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(allClips.length / CLIPS_PER_PAGE);
+            const newPage = currentPage + direction;
+
+            if (newPage >= 1 && newPage <= totalPages) {
+                showPage(newPage);
+            }
+        }
+
+        // Initialize pagination on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePagination();
+        });
+
+        // Get all clip videos
+        const clipVideos = document.querySelectorAll('.clip-video');
+
+        clipVideos.forEach((video, index) => {
+            const wrapper = video.closest('.clip-wrapper');
+            const progressBar = wrapper.querySelector('.video-progress-bar');
+            const progressContainer = wrapper.querySelector('.video-progress');
+            const timeDisplay = wrapper.querySelector('.video-time');
+
+            // Format time in minutes:seconds
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            // Update progress bar and time as video plays
+            video.addEventListener('timeupdate', () => {
+                const progress = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = progress + '%';
+
+                // Update time display
+                const current = formatTime(video.currentTime);
+                const total = formatTime(video.duration);
+                timeDisplay.textContent = `${current} / ${total}`;
+            });
+
+            // Set initial duration when metadata loads
+            video.addEventListener('loadedmetadata', () => {
+                const total = formatTime(video.duration);
+                timeDisplay.textContent = `0:00 / ${total}`;
+            });
+
+            // Click progress bar to seek
+            progressContainer.addEventListener('click', (e) => {
+                const rect = progressContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const percentage = clickX / rect.width;
+                video.currentTime = percentage * video.duration;
+            });
+
+            // Click to play/pause and maximize - only one video plays at a time
+            video.addEventListener('click', () => {
+                const allWrappers = document.querySelectorAll('.clip-wrapper');
+                const clipsGrid = document.getElementById('clipsGrid');
+
+                if (video.paused) {
+                    // Pause all other videos first
+                    clipVideos.forEach(otherVideo => {
+                        if (otherVideo !== video) {
+                            otherVideo.pause();
+                        }
+                    });
+
+                    // Maximize this video and minimize others
+                    allWrappers.forEach(w => {
+                        if (w === wrapper) {
+                            w.classList.add('maximized');
+                            w.classList.remove('minimized');
+                        } else {
+                            w.classList.add('minimized');
+                            w.classList.remove('maximized');
+                        }
+                    });
+
+                    // Add overlay background
+                    clipsGrid.classList.add('has-maximized');
+
+                    // Then play this video with sound
+                    video.muted = false;
+                    video.volume = 0.7;
+                    video.play();
+                } else {
+                    // Pause and restore all videos to normal size
+                    video.pause();
+                    allWrappers.forEach(w => {
+                        w.classList.remove('maximized', 'minimized');
+                    });
+                    clipsGrid.classList.remove('has-maximized');
+                }
+            });
+
+            // Enable fullscreen on double-click
+            video.addEventListener('dblclick', () => {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.mozRequestFullScreen) {
+                    video.mozRequestFullScreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            });
+        });
+
+        // Close maximize button functionality
+        const closeMaximizeBtns = document.querySelectorAll('.close-maximize-btn');
+        closeMaximizeBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering video click
+                const wrapper = btn.closest('.clip-wrapper');
+                const video = wrapper.querySelector('.clip-video');
+                const allWrappers = document.querySelectorAll('.clip-wrapper');
+                const clipsGrid = document.getElementById('clipsGrid');
+
+                // Pause video and restore all to normal size
+                video.pause();
+                allWrappers.forEach(w => {
+                    w.classList.remove('maximized', 'minimized');
+                });
+                clipsGrid.classList.remove('has-maximized');
+            });
+        });
+
+        // Fullscreen button functionality
+        const fullscreenBtns = document.querySelectorAll('.fullscreen-btn');
+        fullscreenBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering video click
+                const video = btn.parentElement.querySelector('.clip-video');
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.mozRequestFullScreen) {
+                    video.mozRequestFullScreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

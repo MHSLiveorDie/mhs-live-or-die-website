@@ -1,0 +1,12 @@
+# Netlify Redirects File
+# Simple redirect rules (alternative to netlify.toml redirects)
+# Documentation: https://docs.netlify.com/routing/redirects/
+
+# Redirect old intro page to new index
+/intro.html   /index.html   301
+
+# Redirect old index to home
+/index-old.html   /home.html   301
+
+# Handle 404 errors - redirect to home
+/404.html   /home.html   404

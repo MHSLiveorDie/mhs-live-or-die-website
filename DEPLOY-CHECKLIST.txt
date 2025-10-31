@@ -1,0 +1,101 @@
+========================================
+NETLIFY DEPLOYMENT CHECKLIST
+========================================
+
+Your deployment folder is ready at:
+S:\mhs-live-or-die-website-deploy\
+
+FILES INCLUDED:
+✅ index.html (landing page)
+✅ home.html (main site)
+✅ about.html
+✅ videos.html
+✅ reels.html
+✅ clips.html
+✅ live.html
+✅ Video pages (titanfall, gears)
+✅ netlify.toml (config)
+✅ _redirects (routing)
+✅ .gitignore
+✅ css/ folder (all styles)
+✅ js/ folder (all scripts)
+✅ mhsconnect/ folder (social network)
+
+VIDEOS INCLUDED:
+✅ COD Zombies.mp4 (5.4MB)
+✅ 74.mp4 (75MB)
+✅ Battlefield 6.mp4 (107MB)
+✅ Intro page gears.mp4 (41MB)
+✅ Metal Gear Solid Part 1.mp4 (18MB)
+
+VIDEOS EXCLUDED (too large):
+❌ Gears 5 Montage.mp4 (2.9GB)
+❌ official trailer.mp4 (310MB)
+
+========================================
+DEPLOYMENT STEPS:
+========================================
+
+1. Go to: https://www.netlify.com
+2. Click "Sign Up" (FREE)
+3. Choose sign-up method (Email/GitHub)
+4. Complete registration
+5. Go to "Sites" dashboard
+6. Drag THIS ENTIRE FOLDER to upload area
+7. Wait 30 seconds
+8. Site is LIVE! (with random URL)
+9. Click "Domain settings"
+10. Add custom domain: mhsliveordie.com
+11. Copy Netlify nameservers
+12. Update nameservers at networksolutions.com
+13. Wait 4-24 hours for DNS
+14. Done!
+
+========================================
+IMPORTANT NOTES:
+========================================
+
+⚠️ Battlefield 6.mp4 is 107MB
+   - Netlify limit is 100MB per file
+   - Might fail to upload
+   - If it fails, upload to YouTube instead
+
+⚠️ Music folder not included
+   - Check if music files exist
+   - May need to add separately
+
+✅ All HTML links updated
+✅ Navigation works correctly
+✅ MHS Connect social network included
+
+========================================
+AFTER DEPLOYMENT:
+========================================
+
+TEST THESE:
+□ Landing page loads (index.html)
+□ Click "ENTER SITE" → goes to home
+□ Background video plays
+□ All navigation links work
+□ Videos load and play
+□ CSS styling looks correct
+□ MHS Connect pages work
+
+IF SOMETHING FAILS:
+- Check browser console (F12)
+- Look for 404 errors
+- Verify file names match exactly
+- Check Netlify deploy log
+
+========================================
+
+TOTAL SIZE: ~250MB
+DEPLOYMENT TIME: 2-5 minutes
+COST: FREE FOREVER
+
+Your domain mhsliveordie.com will be live
+within 24 hours after DNS updates!
+
+🚀 Ready to deploy!
+
+========================================

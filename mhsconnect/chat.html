@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MHS Connect - Chat</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/social.css" />
+  <link rel="stylesheet" href="css/chat.css" />
+</head>
+<body>
+  <header class="mhs-header">
+    <h1>MHS <span class="con">CON</span><span class="nect">NECT</span></h1>
+    <nav>
+      <a href="feed.html">Feed</a>
+      <a href="upload.html">Upload</a>
+      <a href="profile.html">Profile</a>
+      <a href="chat.html" class="active">Chat</a>
+      <a href="../intro.html" class="back">← Back to Main</a>
+    </nav>
+  </header>
+
+  <main class="chat-container">
+    <!-- Left Sidebar - Conversations List -->
+    <aside class="chat-sidebar">
+      <div class="sidebar-header">
+        <h2>Messages</h2>
+        <button class="new-chat-btn">+</button>
+      </div>
+
+      <div class="conversations-list">
+        <!-- Conversation 1 -->
+        <div class="conversation-item active" data-user="PlayerX">
+          <img src="https://via.placeholder.com/50" alt="PlayerX" class="conv-avatar">
+          <div class="conv-info">
+            <div class="conv-name">@PlayerX</div>
+            <div class="conv-preview">That clutch was insane! 🔥</div>
+          </div>
+          <div class="conv-time">2m</div>
+        </div>
+
+        <!-- Conversation 2 -->
+        <div class="conversation-item" data-user="Nova">
+          <img src="https://via.placeholder.com/50" alt="Nova" class="conv-avatar">
+          <div class="conv-info">
+            <div class="conv-name">@Nova</div>
+            <div class="conv-preview">Want to squad up later?</div>
+          </div>
+          <div class="conv-time">15m</div>
+        </div>
+
+        <!-- Conversation 3 -->
+        <div class="conversation-item" data-user="Arodi">
+          <img src="https://via.placeholder.com/50" alt="Arodi" class="conv-avatar">
+          <div class="conv-info">
+            <div class="conv-name">@Arodi</div>
+            <div class="conv-preview">Check out my new montage</div>
+          </div>
+          <div class="conv-time">1h</div>
+        </div>
+
+        <!-- Conversation 4 -->
+        <div class="conversation-item" data-user="Ghost">
+          <img src="https://via.placeholder.com/50" alt="Ghost" class="conv-avatar">
+          <div class="conv-info">
+            <div class="conv-name">@Ghost</div>
+            <div class="conv-preview">GG on that match</div>
+          </div>
+          <div class="conv-time">3h</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Side - Chat Window -->
+    <section class="chat-window">
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <img src="https://via.placeholder.com/40" alt="PlayerX" class="chat-user-avatar">
+        <div class="chat-user-name">@PlayerX</div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="messages-area" id="messagesArea">
+        <!-- Received Message -->
+        <div class="message received">
+          <img src="https://via.placeholder.com/35" alt="PlayerX" class="message-avatar">
+          <div class="message-bubble">
+            <p>Yo! Did you see that final kill cam? 💀</p>
+            <span class="message-time">10:32 AM</span>
+          </div>
+        </div>
+
+        <!-- Sent Message -->
+        <div class="message sent">
+          <div class="message-bubble">
+            <p>Yeah bro! That was insane! 🔥</p>
+            <span class="message-time">10:33 AM</span>
+          </div>
+        </div>
+
+        <!-- Received Message -->
+        <div class="message received">
+          <img src="https://via.placeholder.com/35" alt="PlayerX" class="message-avatar">
+          <div class="message-bubble">
+            <p>We need to record more content together</p>
+            <span class="message-time">10:34 AM</span>
+          </div>
+        </div>
+
+        <!-- Sent Message -->
+        <div class="message sent">
+          <div class="message-bubble">
+            <p>For sure! I'm down tonight around 8</p>
+            <span class="message-time">10:35 AM</span>
+          </div>
+        </div>
+
+        <!-- Received Message -->
+        <div class="message received">
+          <img src="https://via.placeholder.com/35" alt="PlayerX" class="message-avatar">
+          <div class="message-bubble">
+            <p>That clutch was insane! 🔥</p>
+            <span class="message-time">Just now</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <div class="message-input-area">
+        <input type="text" id="messageInput" placeholder="Type a message..." class="message-input">
+        <button class="send-btn" id="sendBtn">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/social.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

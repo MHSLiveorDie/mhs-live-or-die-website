@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MHS Connect - Feed</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/social.css" />
+</head>
+<body>
+  <header class="mhs-header">
+    <h1>MHS <span class="con">CON</span><span class="nect">NECT</span></h1>
+    <nav>
+      <a href="feed.html" class="active">Feed</a>
+      <a href="upload.html">Upload</a>
+      <a href="profile.html">Profile</a>
+      <a href="chat.html">Chat</a>
+      <a href="../intro.html" class="back">← Back to Main</a>
+    </nav>
+  </header>
+
+  <main class="feed-container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar-left">
+      <!-- Profile Card -->
+      <div class="sidebar-card profile-mini">
+        <img src="https://via.placeholder.com/80" alt="You" class="profile-mini-avatar">
+        <div class="profile-mini-name">@YourName</div>
+        <div class="profile-mini-bio">Gaming enthusiast 🎮</div>
+        <div class="profile-mini-stats">
+          <div class="stat-item">
+            <span class="stat-number">42</span>
+            <span class="stat-label">Posts</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">1.2K</span>
+            <span class="stat-label">Followers</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">890</span>
+            <span class="stat-label">Following</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Navigation -->
+      <div class="sidebar-card">
+        <h3>Navigation</h3>
+        <ul class="quick-nav">
+          <li><a href="feed.html"><span class="quick-nav-icon">🏠</span> Home</a></li>
+          <li><a href="profile.html"><span class="quick-nav-icon">👤</span> Profile</a></li>
+          <li><a href="chat.html"><span class="quick-nav-icon">💬</span> Messages</a></li>
+          <li><a href="#"><span class="quick-nav-icon">🔖</span> Saved</a></li>
+          <li><a href="#"><span class="quick-nav-icon">⚙️</span> Settings</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Feed -->
+    <div class="feed-main">
+      <!-- Example Post 1 -->
+      <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@Arodi</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../COD Zombies.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">COD Zombies: "Survive or Die 🔥"</p>
+      <div class="actions">
+        <button class="like-btn">❤️ Like</button>
+        <button class="comment-btn">💬 Comment (3)</button>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="comments-section">
+        <!-- Comment Input -->
+        <div class="comment-input-area">
+          <img src="https://via.placeholder.com/35" alt="You">
+          <input type="text" class="comment-input" placeholder="Write a comment...">
+          <button class="comment-submit-btn">Post</button>
+        </div>
+
+        <!-- Comments List -->
+        <div class="comments-list">
+          <!-- Comment 1 -->
+          <div class="comment">
+            <img src="https://via.placeholder.com/35" alt="Nova" class="comment-avatar">
+            <div class="comment-content">
+              <div class="comment-header">
+                <span class="comment-author">@Nova</span>
+                <span class="comment-time">2h ago</span>
+              </div>
+              <p class="comment-text">That was insane! How did you clutch that?! 🔥</p>
+              <div class="comment-actions">
+                <button class="comment-action-btn comment-like-btn">❤️ Like (5)</button>
+                <button class="comment-action-btn comment-reply-btn">Reply</button>
+              </div>
+
+              <!-- Reply Input (hidden by default) -->
+              <div class="reply-input-area">
+                <input type="text" class="comment-input" placeholder="Write a reply...">
+                <button class="comment-submit-btn">Reply</button>
+              </div>
+
+              <!-- Nested Replies -->
+              <div class="comment-replies">
+                <div class="comment">
+                  <img src="https://via.placeholder.com/35" alt="Arodi" class="comment-avatar">
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author">@Arodi</span>
+                      <span class="comment-time">1h ago</span>
+                    </div>
+                    <p class="comment-text">Thanks! Just got lucky with the timing 😅</p>
+                    <div class="comment-actions">
+                      <button class="comment-action-btn comment-like-btn">❤️ Like (2)</button>
+                      <button class="comment-action-btn comment-reply-btn">Reply</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comment 2 -->
+          <div class="comment">
+            <img src="https://via.placeholder.com/35" alt="PlayerX" class="comment-avatar">
+            <div class="comment-content">
+              <div class="comment-header">
+                <span class="comment-author">@PlayerX</span>
+                <span class="comment-time">3h ago</span>
+              </div>
+              <p class="comment-text">We need to play together more often! 🎮</p>
+              <div class="comment-actions">
+                <button class="comment-action-btn comment-like-btn">❤️ Like (8)</button>
+                <button class="comment-action-btn comment-reply-btn">Reply</button>
+              </div>
+              <div class="reply-input-area">
+                <input type="text" class="comment-input" placeholder="Write a reply...">
+                <button class="comment-submit-btn">Reply</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comment 3 -->
+          <div class="comment">
+            <img src="https://via.placeholder.com/35" alt="Ghost" class="comment-avatar">
+            <div class="comment-content">
+              <div class="comment-header">
+                <span class="comment-author">@Ghost</span>
+                <span class="comment-time">5h ago</span>
+              </div>
+              <p class="comment-text">Bro you're a beast! 💀</p>
+              <div class="comment-actions">
+                <button class="comment-action-btn comment-like-btn">❤️ Like (12)</button>
+                <button class="comment-action-btn comment-reply-btn">Reply</button>
+              </div>
+              <div class="reply-input-area">
+                <input type="text" class="comment-input" placeholder="Write a reply...">
+                <button class="comment-submit-btn">Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Example Post 2 -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@PlayerX</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Battlefield 6.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Battlefield Victory – Night Raid 💀</p>
+      <div class="actions">
+        <button class="like-btn">🔥 React</button>
+        <button class="comment-btn">💬 Comment</button>
+      </div>
+    </article>
+
+    <!-- Example Post 3 -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@Nova</span>
+      </div>
+      <img src="https://via.placeholder.com/800x600?text=Gaming+Setup" alt="Post Image" class="post-image" />
+      <p class="caption">New LED gaming setup 💡</p>
+      <div class="actions">
+        <button class="like-btn">❤️ Like</button>
+        <button class="comment-btn">💬 Comment</button>
+      </div>
+    </article>
+    </div><!-- End feed-main -->
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar-right">
+      <!-- Online Users -->
+      <div class="sidebar-card">
+        <h3>Online Now</h3>
+        <div class="online-user">
+          <div class="online-user-avatar">
+            <img src="https://via.placeholder.com/45" alt="PlayerX">
+            <div class="online-indicator"></div>
+          </div>
+          <div class="online-user-info">
+            <div class="online-user-name">@PlayerX</div>
+            <div class="online-user-status">Playing COD</div>
+          </div>
+        </div>
+
+        <div class="online-user">
+          <div class="online-user-avatar">
+            <img src="https://via.placeholder.com/45" alt="Nova">
+            <div class="online-indicator"></div>
+          </div>
+          <div class="online-user-info">
+            <div class="online-user-name">@Nova</div>
+            <div class="online-user-status">Active now</div>
+          </div>
+        </div>
+
+        <div class="online-user">
+          <div class="online-user-avatar">
+            <img src="https://via.placeholder.com/45" alt="Ghost">
+            <div class="online-indicator"></div>
+          </div>
+          <div class="online-user-info">
+            <div class="online-user-name">@Ghost</div>
+            <div class="online-user-status">Streaming</div>
+          </div>
+        </div>
+
+        <div class="online-user">
+          <div class="online-user-avatar">
+            <img src="https://via.placeholder.com/45" alt="Shadow">
+            <div class="online-indicator"></div>
+          </div>
+          <div class="online-user-info">
+            <div class="online-user-name">@Shadow</div>
+            <div class="online-user-status">Active now</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community Stats -->
+      <div class="sidebar-card">
+        <h3>Community</h3>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-box-number">1.2K</span>
+            <span class="stat-box-label">Members</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-box-number">342</span>
+            <span class="stat-box-label">Online</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-box-number">5.4K</span>
+            <span class="stat-box-label">Posts</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-box-number">12K</span>
+            <span class="stat-box-label">Comments</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending -->
+      <div class="sidebar-card">
+        <h3>Trending</h3>
+        <div class="trending-item">
+          <div class="trending-tag">#CODZombies</div>
+          <div class="trending-count">234 posts</div>
+        </div>
+        <div class="trending-item">
+          <div class="trending-tag">#Battlefield</div>
+          <div class="trending-count">189 posts</div>
+        </div>
+        <div class="trending-item">
+          <div class="trending-tag">#ClutchMoments</div>
+          <div class="trending-count">156 posts</div>
+        </div>
+        <div class="trending-item">
+          <div class="trending-tag">#GamingSetup</div>
+          <div class="trending-count">98 posts</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <p>© 2025 MHS Connect | Ad-Free Private Network</p>
+  </footer>
+
+  <script src="js/social.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MHS Live or Die - Enter if you dare. Survival Horror & Battlefield Gaming.">
+    <title>MHS Live or Die - Enter</title>
+    <link rel="stylesheet" href="css/intro-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Electrolize&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="intro-container">
+        <!-- Loading Screen -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loading-content">
+                <h2 class="loading-title">MHS LIVE OR DIE</h2>
+                <div class="loading-bar-container">
+                    <div class="loading-bar" id="loadingBar"></div>
+                </div>
+                <p class="loading-text" id="loadingText">Initializing combat systems...</p>
+                <div class="loading-percentage" id="loadingPercentage">0%</div>
+            </div>
+        </div>
+
+        <!-- Fullscreen Background Video -->
+        <div class="fullscreen-video-bg" id="fullscreenVideoBg">
+            <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+                <source src="Intro page gears mhs live or die intro.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay" id="videoOverlay"></div>
+        </div>
+
+        <!-- Video Audio Control -->
+        <div class="video-audio-control" id="videoAudioControl">
+            <button class="audio-control-btn" id="audioControlBtn">
+                <span class="mute-icon">🔇</span>
+                <span class="unmute-icon" style="display: none;">🔊</span>
+            </button>
+            <span class="audio-label">Background Video Audio</span>
+        </div>
+
+        <!-- Main Content -->
+        <div class="intro-content" id="introContent" style="opacity: 0;">
+            <!-- Logo/Title -->
+            <div class="intro-logo">
+                <p class="intro-tagline">Enter if you dare...</p>
+                <div class="welcome-message" id="welcomeMessage">
+                    <span class="typing-text" id="typingText"></span>
+                    <span class="cursor">|</span>
+                </div>
+            </div>
+
+            <!-- Enter Button -->
+            <div class="intro-actions">
+                <a href="home.html" class="enter-btn">
+                    <span class="btn-text">ENTER SITE</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Particles Effect -->
+        <div class="particles"></div>
+    </div>
+
+    <script src="js/intro.js"></script>
+</body>
+</html>
