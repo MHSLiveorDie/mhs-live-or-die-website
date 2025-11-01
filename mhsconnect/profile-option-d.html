@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Universal Profile - MHS Konnect</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/social.css" />
+  <link rel="stylesheet" href="css/profile-option-d.css" />
+</head>
+<body>
+  <header class="mhs-header">
+    <h1>MHS <span class="con" style="color: #00ff41 !important; text-shadow: 0 0 15px rgba(0, 255, 65, 0.5) !important;">KON</span><span class="nect" style="color: #ff0000 !important; text-shadow: 0 0 15px rgba(255, 0, 0, 0.5) !important;">NECT</span></h1>
+    <nav>
+      <a href="feed.html">Feed</a>
+      <a href="upload.html">Upload</a>
+      <a href="profile-option-d.html" class="active">Profile</a>
+      <a href="chat.html">Chat</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" id="logout-btn">🚪 Logout</a>
+    </nav>
+  </header>
+
+  <main class="universal-profile">
+    <!-- Cover Banner Section -->
+    <div class="profile-banner">
+      <div class="banner-gradient"></div>
+      <button class="change-banner-btn" id="change-banner-btn">📷 Change Banner</button>
+      <div class="banner-badges">
+        <div class="floating-badge">🏆 Level 15</div>
+        <div class="floating-badge">⭐ Elite Gamer</div>
+        <div class="floating-badge">🔥 7 Day Streak</div>
+      </div>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="profile-header-universal">
+      <div class="profile-main-section">
+        <div class="profile-avatar-large">
+          <img src="https://via.placeholder.com/150/00ff41/000000?text=U" alt="Profile" id="profile-avatar-large">
+          <div class="avatar-level-ring"></div>
+          <span class="online-status" title="Online">🟢</span>
+        </div>
+
+        <div class="profile-identity">
+          <h1 class="display-name" id="display-name">@username</h1>
+          <p class="user-bio" id="user-bio">Gaming enthusiast | Content creator | Coffee lover ☕ | Living the dream 🎮</p>
+
+          <div class="profile-metadata">
+            <span class="meta-tag">📍 United States</span>
+            <span class="meta-tag">🎮 PC / Xbox</span>
+            <span class="meta-tag">⏱️ Joined Jan 2025</span>
+          </div>
+
+          <div class="universal-stats">
+            <div class="stat-box">
+              <div class="stat-number" id="stat-posts">0</div>
+              <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="stat-followers">0</div>
+              <div class="stat-label">Followers</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="stat-following">0</div>
+              <div class="stat-label">Following</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number" id="stat-likes">0</div>
+              <div class="stat-label">Total Likes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-actions-section">
+        <button class="action-btn btn-primary" id="edit-profile-btn">✏️ Edit Profile</button>
+        <button class="action-btn btn-secondary" id="share-profile-btn">🔗 Share</button>
+        <button class="action-btn btn-secondary" id="message-btn">💬 Message</button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="profile-nav-tabs">
+      <button class="nav-tab active" data-tab="feed">📱 Feed</button>
+      <button class="nav-tab" data-tab="gaming">🎮 Gaming</button>
+      <button class="nav-tab" data-tab="content">📸 Content</button>
+      <button class="nav-tab" data-tab="about">ℹ️ About</button>
+    </div>
+
+    <!-- Tab Content Area -->
+    <div class="profile-content-area">
+      <!-- Feed Tab -->
+      <div class="tab-section active" data-tab-section="feed">
+        <div class="feed-layout">
+          <!-- Left Sidebar -->
+          <aside class="feed-sidebar">
+            <!-- Quick Info Card -->
+            <div class="sidebar-card">
+              <h3>Quick Info</h3>
+              <div class="info-item">
+                <span class="info-label">Status:</span>
+                <span class="info-value">🟢 Online</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Level:</span>
+                <span class="info-value">15 (Elite)</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Activity:</span>
+                <span class="info-value">Very Active</span>
+              </div>
+            </div>
+
+            <!-- Connected Platforms -->
+            <div class="sidebar-card">
+              <h3>🔗 Connected</h3>
+              <div class="platform-list">
+                <div class="platform-item connected">
+                  <span class="platform-icon">🎮</span>
+                  <span class="platform-name">Xbox Live</span>
+                  <span class="platform-status">✓</span>
+                </div>
+                <div class="platform-item connected">
+                  <span class="platform-icon">💨</span>
+                  <span class="platform-name">Steam</span>
+                  <span class="platform-status">✓</span>
+                </div>
+                <div class="platform-item">
+                  <span class="platform-icon">🎮</span>
+                  <span class="platform-name">PlayStation</span>
+                  <span class="platform-status">+</span>
+                </div>
+                <div class="platform-item">
+                  <span class="platform-icon">📺</span>
+                  <span class="platform-name">Twitch</span>
+                  <span class="platform-status">+</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="sidebar-card">
+              <h3>Recent Highlights</h3>
+              <div class="highlights-grid">
+                <div class="highlight-thumb">
+                  <img src="https://via.placeholder.com/80x80/0a0a0a/00ff41?text=1" alt="Highlight">
+                </div>
+                <div class="highlight-thumb">
+                  <img src="https://via.placeholder.com/80x80/0a0a0a/00ff41?text=2" alt="Highlight">
+                </div>
+                <div class="highlight-thumb">
+                  <img src="https://via.placeholder.com/80x80/0a0a0a/00ff41?text=3" alt="Highlight">
+                </div>
+                <div class="highlight-thumb">
+                  <img src="https://via.placeholder.com/80x80/0a0a0a/00ff41?text=4" alt="Highlight">
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main Feed -->
+          <div class="feed-main">
+            <!-- Create Post Box -->
+            <div class="create-post-box">
+              <img src="https://via.placeholder.com/40/00ff41/000000?text=U" alt="You" class="post-avatar">
+              <input type="text" placeholder="What's on your mind?" class="post-input" id="post-input">
+              <div class="post-type-buttons">
+                <button class="post-type-btn" title="Photo">📸</button>
+                <button class="post-type-btn" title="Video">📹</button>
+                <button class="post-type-btn" title="Achievement">🏆</button>
+              </div>
+            </div>
+
+            <!-- Content Filter -->
+            <div class="content-filter-bar">
+              <button class="filter-chip active" data-filter="all">All Posts</button>
+              <button class="filter-chip" data-filter="gaming">🎮 Gaming</button>
+              <button class="filter-chip" data-filter="lifestyle">📸 Lifestyle</button>
+              <button class="filter-chip" data-filter="achievements">🏆 Achievements</button>
+            </div>
+
+            <!-- Post Feed -->
+            <div class="post-timeline">
+              <!-- Sample Achievement Post -->
+              <div class="post-card achievement-post">
+                <div class="post-header">
+                  <img src="https://via.placeholder.com/40/00ff41/000000?text=U" alt="User" class="post-avatar">
+                  <div class="post-author-info">
+                    <span class="post-author">@username</span>
+                    <span class="post-time">2 hours ago · 🎮 Gaming</span>
+                  </div>
+                  <button class="post-menu-btn">⋯</button>
+                </div>
+                <div class="post-content">
+                  <div class="achievement-badge">
+                    <div class="achievement-icon">🏆</div>
+                    <div class="achievement-details">
+                      <h4>Achievement Unlocked!</h4>
+                      <p class="achievement-name">Master Chief</p>
+                      <p class="achievement-desc">Complete Halo Infinite on Legendary</p>
+                      <span class="achievement-platform">Xbox Live · +50G</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="post-footer">
+                  <button class="reaction-btn">🔥 45</button>
+                  <button class="reaction-btn">👍 23</button>
+                  <button class="reaction-btn">💬 12</button>
+                  <button class="reaction-btn">🔄 5</button>
+                </div>
+              </div>
+
+              <!-- Sample Photo Post -->
+              <div class="post-card">
+                <div class="post-header">
+                  <img src="https://via.placeholder.com/40/00ff41/000000?text=U" alt="User" class="post-avatar">
+                  <div class="post-author-info">
+                    <span class="post-author">@username</span>
+                    <span class="post-time">5 hours ago · 📸 Lifestyle</span>
+                  </div>
+                  <button class="post-menu-btn">⋯</button>
+                </div>
+                <div class="post-content">
+                  <p class="post-text">Coffee and coding ☕💻 Perfect way to start the day!</p>
+                  <img src="https://via.placeholder.com/600x400/0a0a0a/ffffff?text=Coffee+Photo" alt="Post" class="post-image">
+                </div>
+                <div class="post-footer">
+                  <button class="reaction-btn">❤️ 89</button>
+                  <button class="reaction-btn">👍 34</button>
+                  <button class="reaction-btn">💬 8</button>
+                  <button class="reaction-btn">🔄 2</button>
+                </div>
+              </div>
+
+              <!-- Sample Video/Clip Post -->
+              <div class="post-card">
+                <div class="post-header">
+                  <img src="https://via.placeholder.com/40/00ff41/000000?text=U" alt="User" class="post-avatar">
+                  <div class="post-author-info">
+                    <span class="post-author">@username</span>
+                    <span class="post-time">1 day ago · 🎮 Gaming</span>
+                  </div>
+                  <button class="post-menu-btn">⋯</button>
+                </div>
+                <div class="post-content">
+                  <p class="post-text">Just hit a 5-kill streak! 💥 Check this out!</p>
+                  <div class="post-video-thumbnail">
+                    <img src="https://via.placeholder.com/600x400/0a0a0a/00ff41?text=Gameplay+Clip" alt="Video">
+                    <div class="play-overlay">▶</div>
+                  </div>
+                </div>
+                <div class="post-footer">
+                  <button class="reaction-btn">🔥 156</button>
+                  <button class="reaction-btn">👍 67</button>
+                  <button class="reaction-btn">💬 23</button>
+                  <button class="reaction-btn">🔄 12</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gaming Tab -->
+      <div class="tab-section" data-tab-section="gaming">
+        <div class="gaming-dashboard">
+          <h2>🎮 Gaming Dashboard</h2>
+          <p style="text-align: center; padding: 40px; color: #999;">Gaming stats and achievements will appear here</p>
+        </div>
+      </div>
+
+      <!-- Content Tab -->
+      <div class="tab-section" data-tab-section="content">
+        <div class="content-grid-view">
+          <h2>📸 All Content</h2>
+          <p style="text-align: center; padding: 40px; color: #999;">Photos and videos grid will appear here</p>
+        </div>
+      </div>
+
+      <!-- About Tab -->
+      <div class="tab-section" data-tab-section="about">
+        <div class="about-section">
+          <h2>ℹ️ About</h2>
+          <p style="text-align: center; padding: 40px; color: #999;">Detailed profile information will appear here</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 MHS Konnect | The Universal Social Network</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/theme-customizer.js"></script>
+  <script src="js/profile-option-d.js"></script>
+</body>
+</html>
