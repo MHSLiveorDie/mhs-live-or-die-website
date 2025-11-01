@@ -60,25 +60,31 @@ body {
 }
 
 .mhs-header h1 .con {
-  color: var(--battlefield-primary);
-  text-shadow: 0 0 15px var(--battlefield-glow);
+  color: #00ff41 !important;
+  text-shadow: 0 0 15px rgba(0, 255, 65, 0.5) !important;
 }
 
 .mhs-header h1 .nect {
-  color: var(--horror-primary);
-  text-shadow: 0 0 15px var(--horror-glow);
+  color: #ff0000 !important;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.5) !important;
 }
 
 .mhs-header nav a {
   margin-left: 25px;
   color: var(--text-primary);
   text-decoration: none;
-  transition: color 0.3s;
+  transition: all 0.3s;
+  padding: 8px 15px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mhs-header nav a:hover,
 .mhs-header nav a.active {
   color: var(--battlefield-primary);
+  background: rgba(0, 255, 65, 0.1);
+  border-color: var(--battlefield-primary);
 }
 
 /* ---- FEED ---- */
@@ -107,6 +113,32 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for sidebars */
+.sidebar-left::-webkit-scrollbar,
+.sidebar-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-left::-webkit-scrollbar-track,
+.sidebar-right::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+  border-radius: 10px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb,
+.sidebar-right::-webkit-scrollbar-thumb {
+  background: var(--battlefield-primary);
+  border-radius: 10px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb:hover,
+.sidebar-right::-webkit-scrollbar-thumb:hover {
+  background: var(--horror-primary);
 }
 
 .sidebar-card {
@@ -354,6 +386,27 @@ body {
   margin: 10px 0;
 }
 
+/* Style native video controls with battlefield green theme */
+.post-video::-webkit-media-controls-panel {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.post-video::-webkit-media-controls-play-button,
+.post-video::-webkit-media-controls-mute-button,
+.post-video::-webkit-media-controls-overflow-button {
+  color: var(--battlefield-primary);
+  filter: brightness(1.2);
+}
+
+.post-video::-webkit-media-controls-timeline {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.post-video::-webkit-media-controls-current-time-display,
+.post-video::-webkit-media-controls-time-remaining-display {
+  color: var(--battlefield-primary);
+}
+
 .post-video-wrapper {
   position: relative;
   width: 100%;
@@ -378,6 +431,49 @@ body {
   border-radius: 0 0 8px 8px;
 }
 
+/* Video controls bar - contains volume, more, and fullscreen buttons */
+.video-controls-bar {
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+/* Shared button styling for volume, more, and fullscreen */
+.volume-btn,
+.more-btn,
+.fullscreen-btn {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 2px solid var(--battlefield-primary);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.volume-btn:hover,
+.more-btn:hover,
+.fullscreen-btn:hover {
+  background: var(--battlefield-primary);
+  color: black;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+}
+
+/* Muted state for volume button */
+.volume-btn.muted {
+  color: var(--horror-primary);
+}
+
 .video-progress-container:hover {
   height: 8px;
 }
@@ -389,6 +485,21 @@ body {
   transition: width 0.1s linear;
   pointer-events: none;
   border-radius: 0 0 8px 8px;
+}
+
+/* Video time display */
+.video-time-display {
+  display: inline-block;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-weight: 600;
+  pointer-events: none;
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid var(--battlefield-primary);
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-size: 0.95rem;
 }
 
 .actions {

@@ -140,6 +140,8 @@ const videoObserverOptions = {
 const videoObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const video = entry.target;
+    const wrapper = video.closest('.post-video-wrapper');
+    const volumeBtn = wrapper.querySelector('.volume-btn');
 
     if (entry.isIntersecting) {
       // Play video muted when in view
@@ -149,6 +151,13 @@ const videoObserver = new IntersectionObserver((entries) => {
       // Pause video when out of view
       video.pause();
       video.currentTime = 0; // Reset to start
+
+      // Reset volume button to muted state
+      video.muted = true;
+      if (volumeBtn) {
+        volumeBtn.textContent = '🔇';
+        volumeBtn.classList.add('muted');
+      }
 
       // If this was the audio video, clear it
       if (currentAudioVideo === video) {
@@ -162,13 +171,25 @@ const videoObserver = new IntersectionObserver((entries) => {
 postVideos.forEach(video => {
   videoObserver.observe(video);
 
-  // Update progress bar as video plays
+  // Update progress bar and time display as video plays
   video.addEventListener('timeupdate', () => {
     const wrapper = video.closest('.post-video-wrapper');
     const progressBar = wrapper.querySelector('.video-progress-bar');
+    const timeDisplay = wrapper.querySelector('.video-time-display');
+
     if (progressBar && video.duration) {
       const percentage = (video.currentTime / video.duration) * 100;
       progressBar.style.width = percentage + '%';
+    }
+
+    if (timeDisplay && video.duration) {
+      const currentMinutes = Math.floor(video.currentTime / 60);
+      const currentSeconds = Math.floor(video.currentTime % 60);
+      const durationMinutes = Math.floor(video.duration / 60);
+      const durationSeconds = Math.floor(video.duration % 60);
+
+      const formatTime = (min, sec) => `${min}:${sec.toString().padStart(2, '0')}`;
+      timeDisplay.textContent = `${formatTime(currentMinutes, currentSeconds)} / ${formatTime(durationMinutes, durationSeconds)}`;
     }
   });
 
@@ -185,26 +206,63 @@ postVideos.forEach(video => {
     });
   }
 
-  // Click on video to unmute - only one video has audio at a time
+  // Click on video to pause/unpause
   video.addEventListener('click', () => {
-    // Mute any previous video
-    if (currentAudioVideo && currentAudioVideo !== video) {
-      currentAudioVideo.muted = true;
+    // Toggle play/pause for this video
+    if (video.paused) {
+      video.play().catch(err => console.log('Play prevented:', err));
+    } else {
+      video.pause();
     }
+  });
+});
 
-    // Toggle mute/unmute for this video
+// Volume button functionality
+const volumeButtons = document.querySelectorAll('.volume-btn');
+
+volumeButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const wrapper = btn.closest('.post-video-wrapper');
+    const video = wrapper.querySelector('.post-video');
+
+    // Toggle mute/unmute
     if (video.muted) {
       video.muted = false;
       video.volume = 0.7;
-      currentAudioVideo = video;
+      btn.textContent = '🔊';
+      btn.classList.remove('muted');
     } else {
       video.muted = true;
-      currentAudioVideo = null;
+      btn.textContent = '🔇';
+      btn.classList.add('muted');
+    }
+  });
+});
+
+// Fullscreen button functionality
+const fullscreenButtons = document.querySelectorAll('.fullscreen-btn');
+
+fullscreenButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const wrapper = btn.closest('.post-video-wrapper');
+    const video = wrapper.querySelector('.post-video');
+
+    // Enter fullscreen on the VIDEO element (not wrapper) to get native controls
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitEnterFullscreen) { // Safari iOS
+      video.webkitEnterFullscreen();
+    } else if (video.webkitRequestFullscreen) { // Safari desktop
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) { // IE11
+      video.msRequestFullscreen();
     }
 
-    // Make sure video is playing
-    if (video.paused) {
-      video.play().catch(err => console.log('Play prevented:', err));
-    }
+    // Ensure video plays in fullscreen with audio
+    video.muted = false;
+    video.volume = 0.7;
+    video.play().catch(err => console.log('Fullscreen play prevented:', err));
   });
 });

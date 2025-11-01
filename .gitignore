@@ -1,5 +1,8 @@
 # MHS Live or Die - Files to Exclude from Git
 
+# Documentation and reminders (local only)
+BEFORE-YOU-COMMIT.txt
+
 # Git LFS now handles all MP4 and MOV files
 # All videos will be stored in Git LFS
 

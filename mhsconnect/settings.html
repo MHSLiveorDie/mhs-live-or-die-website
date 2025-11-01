@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - MHS Konnect</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/social.css" />
+  <link rel="stylesheet" href="css/settings.css" />
+</head>
+<body>
+  <header class="mhs-header">
+    <h1>MHS <span class="con" style="color: #00ff41 !important; text-shadow: 0 0 15px rgba(0, 255, 65, 0.5) !important;">KON</span><span class="nect" style="color: #ff0000 !important; text-shadow: 0 0 15px rgba(255, 0, 0, 0.5) !important;">NECT</span></h1>
+    <nav>
+      <a href="feed.html">Feed</a>
+      <a href="upload.html">Upload</a>
+      <a href="profile.html">Profile</a>
+      <a href="chat.html">Chat</a>
+      <a href="../intro.html" class="back">← Back to Main</a>
+    </nav>
+  </header>
+
+  <main class="settings-container">
+    <h2 class="settings-title">⚙️ Settings</h2>
+
+    <!-- Settings Tabs -->
+    <div class="settings-tabs">
+      <button class="tab-btn active" data-tab="theme">🎨 Theme</button>
+      <button class="tab-btn" data-tab="account">👤 Account</button>
+      <button class="tab-btn" data-tab="privacy">🔒 Privacy</button>
+      <button class="tab-btn" data-tab="notifications">🔔 Notifications</button>
+      <button class="tab-btn" data-tab="content">🎮 Content</button>
+      <button class="tab-btn" data-tab="accessibility">📱 Accessibility</button>
+      <button class="tab-btn" data-tab="advanced">⚙️ Advanced</button>
+    </div>
+
+    <!-- Theme Customization Section -->
+    <section class="settings-section" data-tab-content="theme">
+      <h3 class="section-title">🎨 Theme Customization</h3>
+
+      <!-- Preset Themes -->
+      <div class="settings-group">
+        <label class="settings-label">Preset Themes</label>
+        <div class="theme-presets">
+          <button class="theme-preset-btn active" data-theme="mixed">
+            <span class="theme-preview" style="background: linear-gradient(135deg, #ff0000, #00ff41);"></span>
+            Mixed (Default)
+          </button>
+          <button class="theme-preset-btn" data-theme="dark">
+            <span class="theme-preview" style="background: #000000;"></span>
+            Dark Mode
+          </button>
+          <button class="theme-preset-btn" data-theme="horror">
+            <span class="theme-preview" style="background: linear-gradient(135deg, #8b0000, #ff0000);"></span>
+            Horror
+          </button>
+          <button class="theme-preset-btn" data-theme="battlefield">
+            <span class="theme-preview" style="background: linear-gradient(135deg, #003d00, #00ff41);"></span>
+            Battlefield
+          </button>
+          <button class="theme-preset-btn" data-theme="cyberpunk">
+            <span class="theme-preview" style="background: linear-gradient(135deg, #ff00ff, #00ffff);"></span>
+            Cyberpunk
+          </button>
+          <button class="theme-preset-btn" data-theme="light">
+            <span class="theme-preview" style="background: linear-gradient(135deg, #ffffff, #f0f0f0);"></span>
+            Light
+          </button>
+          <button class="theme-preset-btn" data-theme="grey">
+            <span class="theme-preview" style="background: linear-gradient(135deg, #808080, #a0a0a0);"></span>
+            Grey
+          </button>
+        </div>
+      </div>
+
+      <!-- Custom Colors -->
+      <div class="settings-group">
+        <label class="settings-label">Custom Colors</label>
+        <div class="color-pickers">
+          <div class="color-picker-item">
+            <label for="bg-color">Background Color</label>
+            <input type="color" id="bg-color" value="#0a0a0a">
+          </div>
+          <div class="color-picker-item">
+            <label for="primary-color">Primary Accent (Green)</label>
+            <input type="color" id="primary-color" value="#00ff41">
+          </div>
+          <div class="color-picker-item">
+            <label for="secondary-color">Secondary Accent (Red)</label>
+            <input type="color" id="secondary-color" value="#ff0000">
+          </div>
+          <div class="color-picker-item">
+            <label for="text-color">Text Color</label>
+            <input type="color" id="text-color" value="#ffffff">
+          </div>
+        </div>
+      </div>
+
+      <!-- Background Image -->
+      <div class="settings-group">
+        <label class="settings-label">Background Image</label>
+        <div class="bg-image-controls">
+          <div class="preset-backgrounds">
+            <button class="bg-preset-btn" data-bg="none">None</button>
+            <button class="bg-preset-btn" data-bg="gears">Gears</button>
+            <button class="bg-preset-btn" data-bg="military">Military</button>
+            <button class="bg-preset-btn" data-bg="horror">Horror</button>
+          </div>
+          <div class="custom-bg-upload">
+            <label for="bg-upload" class="upload-label">📁 Upload Custom Image</label>
+            <input type="file" id="bg-upload" accept="image/*" style="display: none;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Opacity & Blur -->
+      <div class="settings-group">
+        <label class="settings-label">Background Effects</label>
+        <div class="effect-controls">
+          <div class="slider-control">
+            <label for="bg-opacity">Opacity: <span id="opacity-value">100</span>%</label>
+            <input type="range" id="bg-opacity" min="0" max="100" value="100">
+          </div>
+          <div class="slider-control">
+            <label for="bg-blur">Blur: <span id="blur-value">0</span>px</label>
+            <input type="range" id="bg-blur" min="0" max="20" value="0">
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="settings-actions">
+        <button class="btn-save" id="save-theme">💾 Save Theme</button>
+        <button class="btn-reset" id="reset-theme">🔄 Reset to Default</button>
+        <button class="btn-preview" id="preview-theme">👁️ Preview</button>
+      </div>
+    </section>
+
+    <!-- Account Settings Section -->
+    <section class="settings-section" data-tab-content="account">
+      <h3 class="section-title">👤 Account Settings</h3>
+
+      <div class="settings-group">
+        <label class="settings-label">Profile Information</label>
+        <div class="form-field">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="@YourName" value="@YourName">
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="email@example.com" value="user@example.com">
+        </div>
+        <div class="form-field">
+          <label for="bio">Bio</label>
+          <textarea id="bio" rows="3" placeholder="Tell us about yourself...">Gaming enthusiast 🎮</textarea>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Profile Picture</label>
+        <div class="profile-pic-upload">
+          <img src="https://via.placeholder.com/100" alt="Profile" id="profile-preview">
+          <label for="profile-pic-input" class="upload-label">📷 Change Picture</label>
+          <input type="file" id="profile-pic-input" accept="image/*" style="display: none;">
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Change Password</label>
+        <div class="form-field">
+          <label for="current-password">Current Password</label>
+          <input type="password" id="current-password" placeholder="••••••••">
+        </div>
+        <div class="form-field">
+          <label for="new-password">New Password</label>
+          <input type="password" id="new-password" placeholder="••••••••">
+        </div>
+        <div class="form-field">
+          <label for="confirm-password">Confirm New Password</label>
+          <input type="password" id="confirm-password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn-save" id="save-account">💾 Save Changes</button>
+        <button class="btn-reset" id="delete-account">🗑️ Delete Account</button>
+      </div>
+    </section>
+
+    <!-- Privacy Settings Section -->
+    <section class="settings-section" data-tab-content="privacy">
+      <h3 class="section-title">🔒 Privacy Settings</h3>
+
+      <div class="settings-group">
+        <label class="settings-label">Profile Visibility</label>
+        <div class="toggle-option">
+          <label>
+            <input type="radio" name="profile-visibility" value="public" checked>
+            <span>🌍 Public - Anyone can see your profile</span>
+          </label>
+        </div>
+        <div class="toggle-option">
+          <label>
+            <input type="radio" name="profile-visibility" value="followers">
+            <span>👥 Followers Only - Only followers can see</span>
+          </label>
+        </div>
+        <div class="toggle-option">
+          <label>
+            <input type="radio" name="profile-visibility" value="private">
+            <span>🔒 Private - Only you can see</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Who Can...</label>
+        <div class="form-field">
+          <label for="can-comment">Comment on your posts</label>
+          <select id="can-comment">
+            <option value="everyone">Everyone</option>
+            <option value="followers">Followers Only</option>
+            <option value="friends">Friends Only</option>
+            <option value="nobody">Nobody</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="can-message">Send you messages</label>
+          <select id="can-message">
+            <option value="everyone">Everyone</option>
+            <option value="followers">Followers Only</option>
+            <option value="friends">Friends Only</option>
+            <option value="nobody">Nobody</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="can-tag">Tag you in posts</label>
+          <select id="can-tag">
+            <option value="everyone">Everyone</option>
+            <option value="followers">Followers Only</option>
+            <option value="friends">Friends Only</option>
+            <option value="nobody">Nobody</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Additional Privacy</label>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="hide-online">
+            <span>Hide online status</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="show-activity">
+            <span>Show activity status</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="read-receipts">
+            <span>Send read receipts</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn-save" id="save-privacy">💾 Save Privacy Settings</button>
+      </div>
+    </section>
+
+    <!-- Notification Settings Section -->
+    <section class="settings-section" data-tab-content="notifications">
+      <h3 class="section-title">🔔 Notification Settings</h3>
+
+      <div class="settings-group">
+        <label class="settings-label">Push Notifications</label>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="notif-likes" checked>
+            <span>❤️ Likes on your posts</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="notif-comments" checked>
+            <span>💬 Comments on your posts</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="notif-followers" checked>
+            <span>👥 New followers</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="notif-mentions">
+            <span>@ Mentions</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="notif-messages" checked>
+            <span>💬 Direct messages</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Email Notifications</label>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="email-weekly">
+            <span>📧 Weekly summary</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="email-updates">
+            <span>📧 Product updates</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Sound</label>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="sound-enabled" checked>
+            <span>🔊 Enable notification sounds</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn-save" id="save-notifications">💾 Save Notification Settings</button>
+      </div>
+    </section>
+
+    <!-- Content Preferences Section -->
+    <section class="settings-section" data-tab-content="content">
+      <h3 class="section-title">🎮 Content Preferences</h3>
+
+      <div class="settings-group">
+        <label class="settings-label">Video Settings</label>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="autoplay-videos" checked>
+            <span>▶️ Autoplay videos</span>
+          </label>
+        </div>
+        <div class="form-field">
+          <label for="video-quality">Default video quality</label>
+          <select id="video-quality">
+            <option value="auto">Auto (Recommended)</option>
+            <option value="4k">4K (2160p)</option>
+            <option value="1080p">Full HD (1080p)</option>
+            <option value="720p">HD (720p)</option>
+            <option value="480p">SD (480p)</option>
+          </select>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="data-saver">
+            <span>📶 Data saver mode (lower quality)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Content Filters</label>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="sensitive-warning">
+            <span>⚠️ Show warning for sensitive content</span>
+          </label>
+        </div>
+        <div class="form-field">
+          <label for="language">Language</label>
+          <select id="language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ja">日本語</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn-save" id="save-content">💾 Save Content Preferences</button>
+      </div>
+    </section>
+
+    <!-- Accessibility Section -->
+    <section class="settings-section" data-tab-content="accessibility">
+      <h3 class="section-title">📱 Accessibility</h3>
+
+      <div class="settings-group">
+        <label class="settings-label">Display</label>
+        <div class="form-field">
+          <label for="font-size">Font Size</label>
+          <select id="font-size">
+            <option value="small">Small</option>
+            <option value="medium" selected>Medium (Default)</option>
+            <option value="large">Large</option>
+            <option value="xlarge">Extra Large</option>
+          </select>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="high-contrast">
+            <span>🔲 High contrast mode</span>
+          </label>
+        </div>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="reduce-motion">
+            <span>🚫 Reduce motion (disable animations)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Keyboard Shortcuts</label>
+        <p class="info-text">Press <kbd>?</kbd> to see all keyboard shortcuts</p>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn-save" id="save-accessibility">💾 Save Accessibility Settings</button>
+      </div>
+    </section>
+
+    <!-- Advanced Settings Section -->
+    <section class="settings-section" data-tab-content="advanced">
+      <h3 class="section-title">⚙️ Advanced Settings</h3>
+
+      <div class="settings-group">
+        <label class="settings-label">Data Management</label>
+        <button class="btn-action" id="clear-cache">🗑️ Clear Cache</button>
+        <button class="btn-action" id="download-data">📥 Download Your Data</button>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Security</label>
+        <div class="checkbox-option">
+          <label>
+            <input type="checkbox" id="two-factor">
+            <span>🔐 Enable Two-Factor Authentication</span>
+          </label>
+        </div>
+        <button class="btn-action" id="active-sessions">📱 Manage Active Sessions</button>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-label">Developer</label>
+        <button class="btn-action" id="api-tokens">🔑 API Access Tokens</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MHS Live or Die. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/theme-customizer.js"></script>
+</body>
+</html>

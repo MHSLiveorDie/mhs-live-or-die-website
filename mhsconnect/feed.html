@@ -13,7 +13,7 @@
 </head>
 <body>
   <header class="mhs-header">
-    <h1>MHS <span class="con">CON</span><span class="nect">NECT</span></h1>
+    <h1>MHS <span class="con" style="color: #00ff41 !important; text-shadow: 0 0 15px rgba(0, 255, 65, 0.5) !important;">KON</span><span class="nect" style="color: #ff0000 !important; text-shadow: 0 0 15px rgba(255, 0, 0, 0.5) !important;">NECT</span></h1>
     <nav>
       <a href="feed.html" class="active">Feed</a>
       <a href="upload.html">Upload</a>
@@ -55,7 +55,7 @@
           <li><a href="profile.html"><span class="quick-nav-icon">👤</span> Profile</a></li>
           <li><a href="chat.html"><span class="quick-nav-icon">💬</span> Messages</a></li>
           <li><a href="#"><span class="quick-nav-icon">🔖</span> Saved</a></li>
-          <li><a href="#"><span class="quick-nav-icon">⚙️</span> Settings</a></li>
+          <li><a href="settings.html"><span class="quick-nav-icon">⚙️</span> Settings</a></li>
         </ul>
       </div>
     </aside>
@@ -70,9 +70,14 @@
       </div>
       <div class="post-video-wrapper">
         <video muted loop playsinline preload="auto" class="post-video">
-          <source src="../COD Zombies.mp4" type="video/mp4" />
+          <source src="../COD-Zombies.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
         <div class="video-progress-container">
           <div class="video-progress-bar"></div>
         </div>
@@ -81,6 +86,7 @@
       <div class="actions">
         <button class="like-btn">❤️ Like</button>
         <button class="comment-btn">💬 Comment (3)</button>
+        <div class="video-time-display">0:00 / 0:00</div>
       </div>
 
       <!-- Comments Section -->
@@ -185,9 +191,14 @@
       </div>
       <div class="post-video-wrapper">
         <video muted loop playsinline preload="auto" class="post-video">
-          <source src="../Battlefield 6.mp4" type="video/mp4" />
+          <source src="../Battlefield-6.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
         <div class="video-progress-container">
           <div class="video-progress-bar"></div>
         </div>
@@ -196,20 +207,287 @@
       <div class="actions">
         <button class="like-btn">🔥 React</button>
         <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
       </div>
     </article>
 
-    <!-- Example Post 3 -->
+    <!-- Post 3 - Metal Gear Solid -->
     <article class="post">
       <div class="user-info">
         <img src="https://via.placeholder.com/45" alt="User" class="avatar">
-        <span class="username">@Nova</span>
+        <span class="username">@SnakeEater</span>
       </div>
-      <img src="https://via.placeholder.com/800x600?text=Gaming+Setup" alt="Post Image" class="post-image" />
-      <p class="caption">New LED gaming setup 💡</p>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Metal-Gear-Solid-Part-1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Stealth gameplay at its finest 🎯</p>
       <div class="actions">
         <button class="like-btn">❤️ Like</button>
         <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 4 - COD Zombies -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@ZombieSlayer</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../COD-Zombies.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Round 50 clutch moment! 🧟‍♂️</p>
+      <div class="actions">
+        <button class="like-btn">🔥 React</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 5 - Battlefield -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@TankCommander</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Battlefield-6.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Dominating the battlefield 💥</p>
+      <div class="actions">
+        <button class="like-btn">❤️ Like</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 6 - Silent Hill -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@HorrorFan</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Silent-Hill-2-Remake.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">This game is terrifying 😱</p>
+      <div class="actions">
+        <button class="like-btn">❤️ Like</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 7 - Metal Gear -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@TacticGamer</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Metal-Gear-Solid-Part-1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">No alerts, pure stealth run 🕵️</p>
+      <div class="actions">
+        <button class="like-btn">🔥 React</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 8 - COD Zombies -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@ApocalypseNow</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../COD-Zombies.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Last man standing 💪</p>
+      <div class="actions">
+        <button class="like-btn">❤️ Like</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 9 - Battlefield -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@WarMachine</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Battlefield-6.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Squad wipe in seconds ⚡</p>
+      <div class="actions">
+        <button class="like-btn">🔥 React</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 10 - Silent Hill -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@DarkGamer</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Silent-Hill-2-Remake.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Can't sleep after this... 👻</p>
+      <div class="actions">
+        <button class="like-btn">❤️ Like</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 11 - Metal Gear -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@SilentOps</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Metal-Gear-Solid-Part-1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Ghost run completed ✅</p>
+      <div class="actions">
+        <button class="like-btn">❤️ Like</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
+      </div>
+    </article>
+
+    <!-- Post 12 - Battlefield -->
+    <article class="post">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/45" alt="User" class="avatar">
+        <span class="username">@SniperElite</span>
+      </div>
+      <div class="post-video-wrapper">
+        <video muted loop playsinline preload="auto" class="post-video">
+          <source src="../Battlefield-6.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-controls-bar">
+          <button class="volume-btn muted" title="Volume">🔇</button>
+          <button class="more-btn" title="More">⋮</button>
+          <button class="fullscreen-btn" title="Fullscreen">⛶</button>
+        </div>
+        <div class="video-progress-container">
+          <div class="video-progress-bar"></div>
+        </div>
+      </div>
+      <p class="caption">Long range headshot compilation 🎯💀</p>
+      <div class="actions">
+        <button class="like-btn">🔥 React</button>
+        <button class="comment-btn">💬 Comment</button>
+        <div class="video-time-display">0:00 / 0:00</div>
       </div>
     </article>
     </div><!-- End feed-main -->
@@ -314,6 +592,7 @@
     <p>© 2025 MHS Connect | Ad-Free Private Network</p>
   </footer>
 
+  <script src="js/theme-customizer.js"></script>
   <script src="js/social.js"></script>
 </body>
 </html>
