@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MHS Connect - Profile</title>
+  <title>Profile - MHS Konnect</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/social.css" />
+  <link rel="stylesheet" href="css/profile-option-a.css" />
 </head>
 <body>
   <header class="mhs-header">
-    <h1>MHS <span class="con">CON</span><span class="nect">NECT</span></h1>
+    <h1>MHS <span class="con" style="color: #00ff41 !important; text-shadow: 0 0 15px rgba(0, 255, 65, 0.5) !important;">KON</span><span class="nect" style="color: #ff0000 !important; text-shadow: 0 0 15px rgba(255, 0, 0, 0.5) !important;">NECT</span></h1>
     <nav>
       <a href="feed.html">Feed</a>
       <a href="upload.html">Upload</a>
@@ -24,19 +25,191 @@
     </nav>
   </header>
 
-  <main class="feed-container">
-    <div style="text-align: center; padding: 4rem 2rem;">
-      <h2 style="color: var(--green); font-size: 3rem; margin-bottom: 1rem;">👤 Profile Coming Soon</h2>
-      <p style="font-size: 1.3rem; color: var(--text);">Customize your profile and view your stats!</p>
-      <p style="margin-top: 2rem; opacity: 0.7;">Feature in development...</p>
+  <main class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="profile-top">
+        <!-- Profile Picture -->
+        <div class="profile-pic-wrapper">
+          <img src="https://via.placeholder.com/150/00ff41/000000?text=U" alt="Profile" class="profile-pic" id="profile-pic">
+          <button class="change-pic-btn" id="change-pic-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Profile Info -->
+        <div class="profile-info">
+          <h2 class="profile-username" id="profile-username">@username</h2>
+
+          <!-- Stats -->
+          <div class="profile-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="posts-count">0</span>
+              <span class="stat-label">Posts</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="followers-count">0</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="following-count">0</span>
+              <span class="stat-label">Following</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="profile-bio">
+        <p id="profile-bio-text">No bio yet. Click Edit Profile to add one!</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="profile-actions">
+        <button class="btn-primary" id="edit-profile-btn">Edit Profile</button>
+        <button class="btn-secondary" id="share-profile-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          Share
+        </button>
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="profile-content">
+      <div class="content-header">
+        <h3>Posts</h3>
+        <div class="content-filter">
+          <button class="filter-btn active" data-filter="recent">Most Recent</button>
+          <button class="filter-btn" data-filter="popular">Most Popular</button>
+        </div>
+      </div>
+
+      <!-- Videos Grid -->
+      <div class="videos-grid" id="videos-grid">
+        <!-- Sample Video Cards -->
+        <div class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+1" alt="Video">
+            <div class="video-overlay">
+              <div class="video-stats">
+                <span>👁 1.2K</span>
+                <span>❤ 245</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+2" alt="Video">
+            <div class="video-overlay">
+              <div class="video-stats">
+                <span>👁 890</span>
+                <span>❤ 123</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+3" alt="Video">
+            <div class="video-overlay">
+              <div class="video-stats">
+                <span>👁 2.5K</span>
+                <span>❤ 567</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+4" alt="Video">
+            <div class="video-overlay">
+              <div class="video-stats">
+                <span>👁 450</span>
+                <span>❤ 89</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+5" alt="Video">
+            <div class="video-overlay">
+              <div class="video-stats">
+                <span>👁 3.1K</span>
+                <span>❤ 789</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumbnail">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+6" alt="Video">
+            <div class="video-overlay">
+              <div class="video-stats">
+                <span>👁 675</span>
+                <span>❤ 234</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state" style="display: none;">
+        <div class="empty-icon">📹</div>
+        <h3>No posts yet</h3>
+        <p>When you upload videos, they'll appear here</p>
+        <a href="upload.html" class="btn-primary">Upload Your First Video</a>
+      </div>
     </div>
   </main>
 
   <footer>
-    <p>© 2025 MHS Connect | Ad-Free Private Network</p>
+    <p>© 2025 MHS Konnect | Ad-Free Private Network</p>
   </footer>
 
-  <script src="js/social.js"></script>
+  <!-- Edit Profile Modal -->
+  <div class="modal" id="edit-profile-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Profile</h3>
+        <button class="modal-close" id="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Profile Picture URL</label>
+          <input type="text" id="edit-profile-pic" placeholder="Enter image URL">
+        </div>
+        <div class="form-group">
+          <label>Bio</label>
+          <textarea id="edit-bio" rows="4" placeholder="Tell us about yourself..." maxlength="150"></textarea>
+          <small><span id="bio-count">0</span>/150 characters</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="cancel-edit">Cancel</button>
+        <button class="btn-primary" id="save-profile">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/auth.js"></script>
+  <script src="js/theme-customizer.js"></script>
+  <script src="js/profile-option-a.js"></script>
 </body>
 </html>
