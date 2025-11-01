@@ -57,6 +57,20 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
+// Calculate age from date of birth
+function calculateAge(dob) {
+  const birthDate = new Date(dob);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+}
+
 // ===== SIGN UP FUNCTIONALITY =====
 function handleSignup(e) {
   e.preventDefault();
@@ -65,11 +79,11 @@ function handleSignup(e) {
   const email = document.getElementById('signup-email').value.trim();
   const password = document.getElementById('signup-password').value;
   const confirmPassword = document.getElementById('signup-confirm-password').value;
-  const age = parseInt(document.getElementById('signup-age').value);
+  const dob = document.getElementById('signup-dob').value;
   const agreeTerms = document.getElementById('agree-terms').checked;
 
   // Validation
-  if (!username || !email || !password || !confirmPassword || !age) {
+  if (!username || !email || !password || !confirmPassword || !dob) {
     showMessage('Please fill in all fields', 'error');
     return;
   }
@@ -93,6 +107,9 @@ function handleSignup(e) {
     showMessage('Passwords do not match', 'error');
     return;
   }
+
+  // Calculate age from date of birth
+  const age = calculateAge(dob);
 
   if (age < 13) {
     showMessage('You must be at least 13 years old to sign up', 'error');
@@ -122,6 +139,7 @@ function handleSignup(e) {
     username,
     email,
     password, // In production, this should be hashed!
+    dob,
     age,
     createdAt: new Date().toISOString(),
     profilePic: 'https://via.placeholder.com/150/00ff41/000000?text=' + username.charAt(0).toUpperCase(),
