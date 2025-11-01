@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hybrid Profile - MHS Konnect</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/social.css" />
+  <link rel="stylesheet" href="css/profile-option-c.css" />
+</head>
+<body>
+  <header class="mhs-header">
+    <h1>MHS <span class="con" style="color: #00ff41 !important; text-shadow: 0 0 15px rgba(0, 255, 65, 0.5) !important;">KON</span><span class="nect" style="color: #ff0000 !important; text-shadow: 0 0 15px rgba(255, 0, 0, 0.5) !important;">NECT</span></h1>
+    <nav>
+      <a href="feed.html">Feed</a>
+      <a href="upload.html">Upload</a>
+      <a href="profile-option-c.html" class="active">Profile</a>
+      <a href="chat.html">Chat</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" id="logout-btn">🚪 Logout</a>
+    </nav>
+  </header>
+
+  <main class="hybrid-container">
+    <!-- Profile Header Section -->
+    <div class="profile-header-hybrid">
+      <div class="header-content">
+        <!-- Profile Picture & Basic Info -->
+        <div class="profile-main">
+          <div class="avatar-container">
+            <img src="https://via.placeholder.com/150/00ff41/000000?text=U" alt="Profile" class="profile-avatar" id="profile-avatar">
+            <button class="change-avatar-btn" id="change-avatar-btn">📷</button>
+          </div>
+          <div class="profile-details">
+            <h1 class="username" id="username">@username</h1>
+            <p class="bio" id="bio">Gaming enthusiast | Content creator | Living the dream 🎮</p>
+            <div class="profile-meta">
+              <span class="meta-item">📍 Location</span>
+              <span class="meta-item">🎮 PC Gamer</span>
+              <span class="meta-item">⏱️ Joined Jan 2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Stats Bar -->
+        <div class="quick-stats-bar">
+          <div class="quick-stat">
+            <div class="stat-num" id="stat-posts">0</div>
+            <div class="stat-text">Posts</div>
+          </div>
+          <div class="quick-stat">
+            <div class="stat-num" id="stat-followers">0</div>
+            <div class="stat-text">Followers</div>
+          </div>
+          <div class="quick-stat">
+            <div class="stat-num" id="stat-following">0</div>
+            <div class="stat-text">Following</div>
+          </div>
+          <div class="quick-stat">
+            <div class="stat-num" id="stat-likes">0</div>
+            <div class="stat-text">Likes</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="profile-actions-hybrid">
+          <button class="btn-action-primary" id="edit-profile">Edit Profile</button>
+          <button class="btn-action-secondary" id="share-profile">Share</button>
+        </div>
+      </div>
+
+      <!-- Gaming Quick Info -->
+      <div class="gaming-quick-info">
+        <div class="level-display">
+          <div class="level-circle" id="level-circle">15</div>
+          <div class="level-text">
+            <span class="level-title">Level 15</span>
+            <span class="level-rank">🏆 Elite Gamer</span>
+          </div>
+        </div>
+        <div class="quick-badges">
+          <div class="badge-mini">🥇</div>
+          <div class="badge-mini">👥</div>
+          <div class="badge-mini">❤️</div>
+          <div class="badge-mini">🔥</div>
+          <div class="badge-mini">⭐</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Tabs -->
+    <div class="content-tabs">
+      <button class="tab-btn active" data-tab="posts">📹 Posts</button>
+      <button class="tab-btn" data-tab="liked">❤️ Liked</button>
+      <button class="tab-btn" data-tab="saved">🔖 Saved</button>
+      <button class="tab-btn" data-tab="about">ℹ️ About</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content-area">
+      <!-- Posts Tab -->
+      <div class="tab-pane active" data-tab-pane="posts">
+        <div class="content-grid">
+          <div class="video-grid-card">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+1" alt="Video">
+            <div class="video-overlay-info">
+              <span>👁 1.2K</span>
+              <span>❤ 245</span>
+            </div>
+          </div>
+          <div class="video-grid-card">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+2" alt="Video">
+            <div class="video-overlay-info">
+              <span>👁 890</span>
+              <span>❤ 123</span>
+            </div>
+          </div>
+          <div class="video-grid-card">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+3" alt="Video">
+            <div class="video-overlay-info">
+              <span>👁 2.5K</span>
+              <span>❤ 567</span>
+            </div>
+          </div>
+          <div class="video-grid-card">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+4" alt="Video">
+            <div class="video-overlay-info">
+              <span>👁 450</span>
+              <span>❤ 89</span>
+            </div>
+          </div>
+          <div class="video-grid-card">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+5" alt="Video">
+            <div class="video-overlay-info">
+              <span>👁 3.1K</span>
+              <span>❤ 789</span>
+            </div>
+          </div>
+          <div class="video-grid-card">
+            <img src="https://via.placeholder.com/300x400/0a0a0a/00ff41?text=Video+6" alt="Video">
+            <div class="video-overlay-info">
+              <span>👁 675</span>
+              <span>❤ 234</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Liked Tab -->
+      <div class="tab-pane" data-tab-pane="liked">
+        <div class="empty-tab-state">
+          <div class="empty-icon">❤️</div>
+          <h3>No Liked Videos Yet</h3>
+          <p>Videos you like will appear here</p>
+        </div>
+      </div>
+
+      <!-- Saved Tab -->
+      <div class="tab-pane" data-tab-pane="saved">
+        <div class="empty-tab-state">
+          <div class="empty-icon">🔖</div>
+          <h3>No Saved Videos</h3>
+          <p>Save videos to watch later</p>
+        </div>
+      </div>
+
+      <!-- About Tab -->
+      <div class="tab-pane" data-tab-pane="about">
+        <div class="about-content">
+          <div class="about-section">
+            <h3>🎮 Favorite Games</h3>
+            <div class="tag-list">
+              <span class="tag">Call of Duty</span>
+              <span class="tag">Fortnite</span>
+              <span class="tag">Minecraft</span>
+              <span class="tag">Apex Legends</span>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h3>🏆 Achievements & Badges</h3>
+            <div class="badges-about">
+              <div class="badge-item earned">
+                <div class="badge-icon-large">🥇</div>
+                <div class="badge-info">
+                  <div class="badge-name">First Post</div>
+                  <div class="badge-desc">Upload your first video</div>
+                </div>
+              </div>
+              <div class="badge-item earned">
+                <div class="badge-icon-large">👥</div>
+                <div class="badge-info">
+                  <div class="badge-name">100 Followers</div>
+                  <div class="badge-desc">Reach 100 followers</div>
+                </div>
+              </div>
+              <div class="badge-item earned">
+                <div class="badge-icon-large">❤️</div>
+                <div class="badge-info">
+                  <div class="badge-name">1K Likes</div>
+                  <div class="badge-desc">Get 1,000 total likes</div>
+                </div>
+              </div>
+              <div class="badge-item earned">
+                <div class="badge-icon-large">🔥</div>
+                <div class="badge-info">
+                  <div class="badge-name">7 Day Streak</div>
+                  <div class="badge-desc">Post for 7 days straight</div>
+                </div>
+              </div>
+              <div class="badge-item earned">
+                <div class="badge-icon-large">⭐</div>
+                <div class="badge-info">
+                  <div class="badge-name">Level 10</div>
+                  <div class="badge-desc">Reach level 10</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h3>🔗 Social Links</h3>
+            <div class="social-links-about">
+              <a href="#" class="social-link-item">
+                <span class="social-icon">💬</span>
+                <span>Discord: username#1234</span>
+              </a>
+              <a href="#" class="social-link-item">
+                <span class="social-icon">📺</span>
+                <span>Twitch: twitch.tv/username</span>
+              </a>
+              <a href="#" class="social-link-item">
+                <span class="social-icon">▶️</span>
+                <span>YouTube: youtube.com/username</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h3>📊 Activity Stats</h3>
+            <div class="stats-list">
+              <div class="stat-row">
+                <span>Total Views:</span>
+                <span class="stat-value">15.2K</span>
+              </div>
+              <div class="stat-row">
+                <span>Avg. Likes per Post:</span>
+                <span class="stat-value">234</span>
+              </div>
+              <div class="stat-row">
+                <span>Most Active Day:</span>
+                <span class="stat-value">Saturday</span>
+              </div>
+              <div class="stat-row">
+                <span>Current Streak:</span>
+                <span class="stat-value">7 days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 MHS Konnect | Ad-Free Private Network</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/theme-customizer.js"></script>
+  <script src="js/profile-option-c.js"></script>
+</body>
+</html>
